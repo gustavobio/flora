@@ -100,81 +100,91 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     nrow.synonym <- nrow(synonym)
     if (nrow.synonym > 0L) {
       if (replace.synonyms) {
-        accepted <- relationships[with(relationships, 
-{
-  which(related.id %in% synonym$id)
-}), ]
-nrow.accepted <- nrow(accepted)
-if (nrow.accepted == 0L) {
-  if (nrow.synonym == 1L) {
-    notes <- c(notes, "check no accepted name")
-    res[index, minus.notes] <- synonym
-  }
-  if (nrow.synonym > 1L) {
-    notes <- c(notes, "check no accepted +1 synonyms")
-  }
-}
-if (nrow.accepted == 1L) {
-  accepted.info <- all.taxa[with(all.taxa, {
-    which(id %in% accepted$id)
-  }), ]
-  nrow.accepted.info <- nrow(accepted.info)
-  if (nrow.accepted.info == 0L) {
-    notes <- c(notes, "check no accepted name")
-    res[index, minus.notes] <- synonym
-  }
-  if (nrow.accepted.info == 1L) {
-    notes <- c(notes, "replaced synonym")
-    res[index, minus.notes] <- accepted.info
-  }
-  if (nrow.accepted.info > 1L) {
-    notes <- c(notes, "check +1 accepted")
-    res[index, minus.notes] <- synonym
-  }
-}
-if (nrow.accepted > 1L) {
-  notes <- c(notes, "check +1 accepted entries")
-  res[index, minus.notes] <- synonym
-}
+        ## ver aqui pq pode ser que as relações não sejam de nome aceito e sim sinônimos
+        related <- relationships[with(relationships, {which(related.id %in% synonym$id)}), ]   
+        accepted <- all.taxa[with(all.taxa, {
+          which(id %in% related$id & taxon.status == "accepted")
+        }), ]
+        nrow.accepted <- nrow(accepted)
+        if (nrow.accepted == 0L) {
+          if (nrow.synonym == 1L) {
+            notes <- c(notes, "check no accepted name")
+            res[index, minus.notes] <- synonym
+          }
+          if (nrow.synonym > 1L) {
+            notes <- c(notes, "check no accepted +1 synonyms")
+          }
+        }
+        if (nrow.accepted == 1L) {
+          notes <- c(notes, "replaced synonym")
+          res[index, minus.notes] <- accepted
+        }
+        if (nrow.accepted > 1L) {
+          notes <- c(notes, "check +1 accepted")
+          if (nrow.synonym == 1L) {
+            res[index, minus.notes] <- synonym
+          }
+        }
       }
-else {
-  if (nrow(synonym) == 1L) {
-    res[index, minus.notes] <- synonym
+      else {
+        if (nrow(synonym) == 1L) {
+          res[index, minus.notes] <- synonym
+        }
+        else {
+          notes <- c(notes, "check +1 entries")
+        }
+      }
+      res[index, "notes"] <- paste(notes, collapse = "|")
+      next
+    }
+    
+    undefined <- all.taxa[with(all.taxa, {
+      which(search.str == taxon & is.na(taxon.status))
+    }), ]
+    
+    nrow.undefined <- nrow(undefined)
+    
+    if (nrow.undefined == 0L) {
+      notes <- c(notes, "check undefined status")
+    }
+    
+    if (nrow.undefined == 1L) {
+      notes <- c(notes, "check undefined status")
+      res[index, minus.notes] <- undefined
+    }
+    
+    if (nrow.undefined > 1L) {
+      notes <- c(notes, "check undefined status")
+    }
+    
+    res[index, "notes"] <- paste(notes, collapse = "|")
+  }
+  if (is.null(drop)) {
+    res <- data.frame(res, original.search, stringsAsFactors = FALSE)
   }
   else {
-    notes <- c(notes, "check +1 entries")
+    res <- data.frame(res[, !names(res) %in% drop], original.search, 
+                      stringsAsFactors = FALSE)
   }
-}
-res[index, "notes"] <- paste(notes, collapse = "|")
-next
-    }
+  if (life.form) {
+    res <- merge(res, species.profiles[, c("id", "life.form")], 
+                 by = "id", all.x = TRUE)
   }
-if (is.null(drop)) {
-  res <- data.frame(res, original.search, stringsAsFactors = FALSE)
-}
-else {
-  res <- data.frame(res[, !names(res) %in% drop], original.search, 
-                    stringsAsFactors = FALSE)
-}
-if (life.form) {
-  res <- merge(res, species.profiles[, c("id", "life.form")], 
-               by = "id", all.x = TRUE)
-}
-if (habitat) {
-  res <- merge(res, species.profiles[, c("id", "habitat")], 
-               by = "id", all.x = TRUE)
-}
-if (vernacular) {
-  res <- merge(res, vernacular.names[, c("id", "vernacular.name", 
-                                         "locality")], by = "id", all.x = TRUE)
-}
-if (states) {
-  res <- merge(res, distribution[, c("id", "occurrence")], 
-               by = "id", all.x = TRUE)
-}
-if (establishment) {
-  res <- merge(res, distribution[, c("id", "establishment")], 
-               by = "id", all.x = TRUE)
-}
-res
+  if (habitat) {
+    res <- merge(res, species.profiles[, c("id", "habitat")], 
+                 by = "id", all.x = TRUE)
+  }
+  if (vernacular) {
+    res <- merge(res, vernacular.names[, c("id", "vernacular.name", 
+                                           "locality")], by = "id", all.x = TRUE)
+  }
+  if (states) {
+    res <- merge(res, distribution[, c("id", "occurrence")], 
+                 by = "id", all.x = TRUE)
+  }
+  if (establishment) {
+    res <- merge(res, distribution[, c("id", "establishment")], 
+                 by = "id", all.x = TRUE)
+  }
+  res
 }

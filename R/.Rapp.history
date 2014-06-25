@@ -1,0 +1,19 @@
+require(flora)
+get.taxa
+require(shiny)
+?shiny
+runGitHub('plantminer_flora', 'gustavobio')
+require(devtools)
+?install_github
+install_github('gustavobio/flora')
+?flora
+install_github('gustavobio/flora')
+?flora
+require(tpl)
+tpl.get("myrcia")
+tpl.get("myrcia lingua")
+sample(tpldata:::tpl.names, 200)
+runGitHub('plantminer_flora', 'gustavobio')
+test <- scan(what = "", sep = "\n")
+test
+get.taxa(test)
