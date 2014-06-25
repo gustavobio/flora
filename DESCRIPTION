@@ -1,0 +1,18 @@
+Package: flora
+Type: Package
+Title: tools for interacting with the Brazilian Flora Checklist
+Version: 0.2
+Author: Gustavo Carvalho
+Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
+Depends:
+    R (>= 3.0.2)
+Imports:
+    dplyr
+Description: Tools to quickly compile taxonomic and distribution data from
+    the Brazilian Flora Checklist. No internet connection needed.
+License: GPL (>= 2)
+SysDataCompression: gzip
+Packaged: 2014-05-29 23:18:17 UTC; ewpnpwek
+NeedsCompilation: no
+Repository: CRAN
+Date/Publication: 2014-05-30 01:25:42

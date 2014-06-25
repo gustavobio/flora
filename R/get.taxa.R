@@ -1,0 +1,180 @@
+#' Get plant taxonomical and distribution data
+#' 
+#' This function collects taxonomic information and distribution from the
+#' Brazilian Flora Checklist. Synonyms and misspelled names are resolved 
+#' automatically. Results can be combined with life form, habitat, vernacular
+#' name, and occurrence data.
+#' 
+#' @param taxa a character vector containing one or more taxa, without authors 
+#'   see \code{\link{remove.authors}} if you have a list with authorities
+#' @param replace.synonyms should the function automatically replace synonyms?
+#' @param suggest.names should the function try to correct misspelled names?
+#' @param life.form include the life form of the taxon?
+#' @param habitat include the habitat of the taxon?
+#' @param vernacular include vernacular names and localities?
+#' @param states include occurrence data?
+#' @param establishment include the establishment type (native, cultivated or 
+#'   naturalized)?
+#' @param drop NULL or character vector with names of columns with taxonomic
+#'   information to be removed from the returned data frame. Available names: 
+#'   "id", "scientific.name", "accepted.name", "family", "genus",
+#'   "specific.epiteth", "infra.epiteth", "taxon.rank", "authorship",
+#'   "taxon.status", "name.status", and "search.str".
+#' @details The returned data frame will contain a variable number of rows and 
+#'   columns depending on how the function was called. For instance, since there
+#'   might be more than one vernacular name for each taxon, some rows
+#'   will be duplicated if \code{vernacular} is set to \code{TRUE}. All misspelled taxa
+#'   are automatically corrected if the function can come up with a reasonable
+#'   guess for the name.
+#' @return a data frame
+#' @export
+#' @examples 
+#' data(plants)
+#' get.taxa(plants)
+#' get.taxa(plants, life.form = TRUE, establishment = TRUE)
+get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
+                      life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
+                      establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
+                                                      "infra.epiteth", "name.status")) 
+{
+  taxa <- trim(taxa)
+  taxa <- taxa[nzchar(taxa)]
+  if (length(taxa) == 0L) 
+    stop("No valid names provided.")
+  original.search <- taxa
+  ncol.taxa <- ncol(all.taxa)
+  res <- data.frame(matrix(vector(), length(taxa), ncol.taxa + 
+                             1, dimnames = list(c(), c(names(all.taxa), "notes"))), 
+                    stringsAsFactors = FALSE)
+  minus.notes <- seq_len(ncol.taxa)
+  index <- 0
+  for (taxon in taxa) {
+    notes <- NULL
+    index <- index + 1
+    taxon <- fixCase(taxon)
+    uncertain <- regmatches(taxon, regexpr("[a|c]f+\\.", 
+                                           taxon))
+    if (length(uncertain) != 0L) {
+      taxon <- gsub("\\s[a|c]f+\\.", "", taxon)
+    }
+    ident <- regmatches(taxon, regexpr("\\s+sp\\.+\\w*", 
+                                       taxon))
+    if (length(ident) != 0L) {
+      taxon <- unlist(strsplit(taxon, " "))[1]
+    }
+    found <- length(with(all.taxa, {
+      which(search.str == taxon)
+    })) > 0L
+    if (!found) {
+      if (suggest.names) {
+        taxon <- suggest.names(taxon)
+      }
+      else {
+        res[index, "notes"] <- "not found"
+        next
+      }
+      if (is.na(taxon)) {
+        res[index, "notes"] <- "not found"
+        next
+      }
+      else {
+        notes <- "was misspelled"
+      }
+    }
+    accepted <- all.taxa[with(all.taxa, {
+      which(search.str == taxon & taxon.status == "accepted")
+    }), ]
+    if (nrow(accepted) > 0) {
+      if (nrow(accepted) == 1L) {
+        res[index, minus.notes] <- accepted
+      }
+      else {
+        notes <- c(notes, "check +1 accepted")
+      }
+      res[index, "notes"] <- paste(notes, collapse = "|")
+      next
+    }
+    synonym <- all.taxa[with(all.taxa, {
+      which(search.str == taxon & taxon.status == "synonym")
+    }), ]
+    nrow.synonym <- nrow(synonym)
+    if (nrow.synonym > 0L) {
+      if (replace.synonyms) {
+        accepted <- relationships[with(relationships, 
+{
+  which(related.id %in% synonym$id)
+}), ]
+nrow.accepted <- nrow(accepted)
+if (nrow.accepted == 0L) {
+  if (nrow.synonym == 1L) {
+    notes <- c(notes, "check no accepted name")
+    res[index, minus.notes] <- synonym
+  }
+  if (nrow.synonym > 1L) {
+    notes <- c(notes, "check no accepted +1 synonyms")
+  }
+}
+if (nrow.accepted == 1L) {
+  accepted.info <- all.taxa[with(all.taxa, {
+    which(id %in% accepted$id)
+  }), ]
+  nrow.accepted.info <- nrow(accepted.info)
+  if (nrow.accepted.info == 0L) {
+    notes <- c(notes, "check no accepted name")
+    res[index, minus.notes] <- synonym
+  }
+  if (nrow.accepted.info == 1L) {
+    notes <- c(notes, "replaced synonym")
+    res[index, minus.notes] <- accepted.info
+  }
+  if (nrow.accepted.info > 1L) {
+    notes <- c(notes, "check +1 accepted")
+    res[index, minus.notes] <- synonym
+  }
+}
+if (nrow.accepted > 1L) {
+  notes <- c(notes, "check +1 accepted entries")
+  res[index, minus.notes] <- synonym
+}
+      }
+else {
+  if (nrow(synonym) == 1L) {
+    res[index, minus.notes] <- synonym
+  }
+  else {
+    notes <- c(notes, "check +1 entries")
+  }
+}
+res[index, "notes"] <- paste(notes, collapse = "|")
+next
+    }
+  }
+if (is.null(drop)) {
+  res <- data.frame(res, original.search, stringsAsFactors = FALSE)
+}
+else {
+  res <- data.frame(res[, !names(res) %in% drop], original.search, 
+                    stringsAsFactors = FALSE)
+}
+if (life.form) {
+  res <- merge(res, species.profiles[, c("id", "life.form")], 
+               by = "id", all.x = TRUE)
+}
+if (habitat) {
+  res <- merge(res, species.profiles[, c("id", "habitat")], 
+               by = "id", all.x = TRUE)
+}
+if (vernacular) {
+  res <- merge(res, vernacular.names[, c("id", "vernacular.name", 
+                                         "locality")], by = "id", all.x = TRUE)
+}
+if (states) {
+  res <- merge(res, distribution[, c("id", "occurrence")], 
+               by = "id", all.x = TRUE)
+}
+if (establishment) {
+  res <- merge(res, distribution[, c("id", "establishment")], 
+               by = "id", all.x = TRUE)
+}
+res
+}

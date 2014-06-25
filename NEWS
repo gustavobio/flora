@@ -1,0 +1,26 @@
+flora 0.2
+================
+
+ * All needed data is now included in the package. No internet connection needed
+
+ * New function `get.taxa` to get taxonomic data
+
+ * New function `occurrence` to get occurrence data
+
+ * New function `fixCase` to fix name casing
+
+ * New function `lower.taxa` to get downstream taxa
+
+ * New function `remove.authors` to attempt to remove authors from names
+
+ * New function `standardize.names` to standardize taxon names
+
+ * New function `trim` to trim whitespace characters from names
+
+ * New function `vernacular` to search for taxa using vernacular names
+
+ * Much improved `suggest.names`
+
+ * `get.taxon.info` is now deprecated
+
+ * `fmt.taxa` is now deprecated
