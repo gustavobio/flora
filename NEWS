@@ -1,3 +1,11 @@
+flora 0.2.1
+================
+
+  * Fixed a bug where duplicate names where not processed correctly
+  
+  * Speed improvements
+
+
 flora 0.2
 ================
 

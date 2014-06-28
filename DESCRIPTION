@@ -1,7 +1,7 @@
 Package: flora
 Type: Package
 Title: tools for interacting with the Brazilian Flora Checklist
-Version: 0.2.1
+Version: 0.2.2
 Author: Gustavo Carvalho
 Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
 Depends:
