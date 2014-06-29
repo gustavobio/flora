@@ -6,6 +6,8 @@ Author: Gustavo Carvalho
 Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
 Depends:
     R (>= 3.0.2)
+Imports:
+    shiny
 Description: Tools to quickly compile taxonomic and distribution data from
     the Brazilian Flora Checklist. No internet connection needed.
 License: GPL (>= 2)

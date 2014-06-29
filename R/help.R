@@ -16,6 +16,7 @@
 #' }
 #' flora now holds all the data it needs. All functions can be used whilst offline.
 #' @docType package
+#' @import shiny
 #' @name flora
 #' @aliases flora flora-package
 NULL
