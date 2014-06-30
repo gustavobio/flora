@@ -3,10 +3,11 @@ flora
 
 This is an R package that contains a set o functions to retrieve data the Brazilian Flora Checklist.
 
-First, get devtools:
+First, get devtools and shiny:
 
 ```
 install.packages("devtools")
+install.packages("shiny")
 library(devtools)
 ```
 
