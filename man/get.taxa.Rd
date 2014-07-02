@@ -51,8 +51,10 @@ The returned data frame will contain a variable number of rows and
   guess for the name.
 }
 \examples{
+\dontrun{
 data(plants)
 get.taxa(plants)
 get.taxa(plants, life.form = TRUE, establishment = TRUE)
+}
 }
 

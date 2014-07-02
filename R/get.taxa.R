@@ -29,9 +29,11 @@
 #' @return a data frame
 #' @export
 #' @examples 
+#' \dontrun{
 #' data(plants)
 #' get.taxa(plants)
 #' get.taxa(plants, life.form = TRUE, establishment = TRUE)
+#' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
                       establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 

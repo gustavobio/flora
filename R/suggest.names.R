@@ -29,7 +29,7 @@ suggest.names <-
     #if (grepl("Indet\\.", taxon)) return(taxon)
     ident <- regmatches(taxon, regexpr("\\s+sp\\.+\\w*", taxon))
     if (length(ident) != 0L) taxon <- unlist(strsplit(taxon, " "))[1]
-    if (taxon == "") return(NA)
+    if (nzchar(taxon)) return(NA)
     first.letter <- strsplit(taxon, "")[[1]][1]
     species.first.letter <- all.taxa$search.str[grep(paste("^", first.letter, sep = ""), all.taxa$search.str)]
     l1 <- length(taxon)
