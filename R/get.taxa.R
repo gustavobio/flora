@@ -20,6 +20,9 @@
 #'   "id", "scientific.name", "accepted.name", "family", "genus",
 #'   "specific.epiteth", "infra.epiteth", "taxon.rank", "authorship",
 #'   "taxon.status", "name.status", and "search.str".
+#' @param distance a value between 0 and 1 indicanting how conservative the
+#'   name suggestion algorithm should be. Values closer to 1 are very
+#'   conservative. Be very careful, low values can give wrong suggestions.
 #' @details The returned data frame will contain a variable number of rows and 
 #'   columns depending on how the function was called. For instance, since there
 #'   might be more than one vernacular name for each taxon, some rows
@@ -37,7 +40,7 @@
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
                       establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
-                                                      "infra.epiteth", "name.status")) 
+                                                      "infra.epiteth", "name.status"), suggestion.distance = 0.9) 
 {
   taxa <- trim(taxa)
   taxa <- taxa[nzchar(taxa)]
@@ -69,7 +72,7 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     })) > 0L
     if (!found) {
       if (suggest.names) {
-        taxon <- suggest.names(taxon)
+        taxon <- suggest.names(taxon, max.distance = suggestion.distance)
       }
       else {
         res[index, "notes"] <- "not found"

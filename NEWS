@@ -1,9 +1,12 @@
-flora 0.2.1
+flora 0.2.2
 ================
 
-  * Fixed a bug where duplicate names where not processed correctly
+ * Fixed a bug where duplicate names where not processed correctly
   
-  * Speed improvements
+ * Speed improvements
+
+ * New shiny web app included
+
 
 
 flora 0.2

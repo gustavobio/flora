@@ -3,10 +3,12 @@
 \alias{lower.taxa}
 \title{Get downstream taxa}
 \usage{
-lower.taxa(taxon)
+lower.taxa(taxon, accepted = TRUE)
 }
 \arguments{
 \item{taxon}{a character vector with either a family or genus name}
+
+\item{accepted}{list only accepted names?}
 }
 \description{
 Get all downstream taxa from a family or genus name.

@@ -6,7 +6,7 @@
 get.taxa(taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   life.form = FALSE, habitat = FALSE, vernacular = FALSE,
   states = FALSE, establishment = FALSE, drop = c("authorship", "genus",
-  "specific.epiteth", "infra.epiteth", "name.status"))
+  "specific.epiteth", "infra.epiteth", "name.status"), distance = 0.9)
 }
 \arguments{
 \item{taxa}{a character vector containing one or more taxa, without authors
@@ -32,6 +32,10 @@ information to be removed from the returned data frame. Available names:
 "id", "scientific.name", "accepted.name", "family", "genus",
 "specific.epiteth", "infra.epiteth", "taxon.rank", "authorship",
 "taxon.status", "name.status", and "search.str".}
+
+\item{distance}{a value between 0 and 1 indicanting how conservative the
+name suggestion algorithm should be. Values closer to 1 are very
+conservative. Be very careful, low values can give wrong suggestions.}
 }
 \value{
 a data frame

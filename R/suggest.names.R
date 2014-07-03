@@ -25,11 +25,9 @@ suggest.names <-
     uncertain <- regmatches(taxon, regexpr("[a|c]f+\\.", taxon))
     taxon <- gsub("^\\s+|\\s+$", "", taxon)
     if (length(uncertain) != 0L) taxon <- gsub("[a|c]f+\\.", "", taxon)
-    #if (any(grepl(taxon, ignore.words, ignore.case = TRUE))) return(taxon)
-    #if (grepl("Indet\\.", taxon)) return(taxon)
     ident <- regmatches(taxon, regexpr("\\s+sp\\.+\\w*", taxon))
     if (length(ident) != 0L) taxon <- unlist(strsplit(taxon, " "))[1]
-    if (nzchar(taxon)) return(NA)
+    if (!nzchar(taxon)) return(NA)
     first.letter <- strsplit(taxon, "")[[1]][1]
     species.first.letter <- all.taxa$search.str[grep(paste("^", first.letter, sep = ""), all.taxa$search.str)]
     l1 <- length(taxon)
