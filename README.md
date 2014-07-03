@@ -11,7 +11,7 @@ This R package includes functions to query the Brazilian Flora Checklist.
 
 The dataset included in the package was kindly made available by the [Brazilian Flora Checklist](http://floradobrasil.jbrj.gov.br), which is a joint effort by hundreds of taxonomists to provide an improved checklist of plants and fungae that occur in Brazil.
 
-## Instalation
+## Installation
 
 #### Install devtools and shiny
 
@@ -29,7 +29,7 @@ install_github("gustavobio/flora")
 
 ## Usage
 
-The main function is `get.taxa`
+The main function is `get.taxa`, which will fix misspelled names, replace synonyms, and get taxonomic information for a vector of names.
 
 ```coffee
 library(flora)
@@ -88,7 +88,7 @@ The function `lower.taxa` gets all names, accepted or not, which descends from a
 
 ```coffee
 lower.taxa("Rapanea")
-```coffee
+```
 
 ```coffee
  [1] "Rapanea"              "Rapanea ferruginea"   "Rapanea gardneriana"  "Rapanea guianensis"  
@@ -108,20 +108,36 @@ You may also search for a species using vernacular names:
 ```coffee
 vernacular("Pimenta", exact = TRUE)
 ```
-
-```
       id             search.str          family vernacular.name     locality
 1   7697 Erythroxylum daphnites Erythroxylaceae         pimenta Minas Gerais
 2 110560   Xylopia brasiliensis      Annonaceae         Pimenta         <NA>
 3 110583        Xylopia sericea      Annonaceae         Pimenta         <NA>
 ```
 
+Smaller things like casing and missplaced whitespaces are also covered:
+
+```coffee
+fixCase("myrcia lingua")
+[1] "Myrcia lingua"
+
+trim("Myrcia    lingua   ")
+[1] "Myrcia lingua"
+
+standardize.names("Myrcia sp01")
+[1] "Myrcia sp.1"
+
+standardize.names("Myrcia sp2")
+[1] "Myrcia sp.2"
+
+standardize.names("Myrcia sp.3")
+[1] "Myrcia sp.3"
+```
 ## Web application
 
-There is a web application included where one can simply paste names into a textbox and get taxonomic information, links to the original data source, search within the results and export to a csv file.
+There is a local web application included where one can simply paste names into a textbox and get taxonomic information, links to the original data source, search within the results and export to a csv file.
 
 ```
-web.tpl()
+web.flora()
 ```
-*Click the screenshot for a larger view*
-![](http://i.imgur.com/Kjbb9nx.png)
+*Click on the screenshot for an expanded view*
+![](http://i.imgur.com/pFaBQWI.png)
