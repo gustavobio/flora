@@ -14,7 +14,8 @@ shinyServer(function(input, output) {
                       habitat = input$habitat, 
                       vernacular = input$vernacular, 
                       states = input$states, 
-                      establishment = input$establishment)
+                      establishment = input$establishment,
+                      suggestion.distance = input$distance)
     }
     output$downloadData <- downloadHandler(
       filename = "results.csv",
