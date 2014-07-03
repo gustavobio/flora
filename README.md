@@ -70,7 +70,7 @@ get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"), states = TRUE)
 
 Other arguments include `life.form`, `habitat`, `vernacular`, and `establishment`.
 
-`get.taxa` will automaticaly fix misspelled names when possible, but you can also use `suggest.names` for that:
+`get.taxa` will automatically fix misspelled names when possible, but you can also use `suggest.names` for that:
 
 ```coffee
 suggest.names("Cofea arabyca")
@@ -108,6 +108,8 @@ You may also search for a species using vernacular names:
 ```coffee
 vernacular("Pimenta", exact = TRUE)
 ```
+
+```coffee
       id             search.str          family vernacular.name     locality
 1   7697 Erythroxylum daphnites Erythroxylaceae         pimenta Minas Gerais
 2 110560   Xylopia brasiliensis      Annonaceae         Pimenta         <NA>
