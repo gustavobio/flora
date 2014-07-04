@@ -5,6 +5,6 @@
 #' 
 #' @export
 web.flora <- function() {
-  cat("\nPress escape at any time to stop the application.\n")
+  message("Press escape at any time to stop the application.\n")
   runApp(system.file("plantminer", package = "flora"))
 }
