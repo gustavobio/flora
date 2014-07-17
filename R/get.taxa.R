@@ -20,7 +20,7 @@
 #'   "id", "scientific.name", "accepted.name", "family", "genus",
 #'   "specific.epiteth", "infra.epiteth", "taxon.rank", "authorship",
 #'   "taxon.status", "name.status", and "search.str".
-#' @param distance a value between 0 and 1 indicanting how conservative the
+#' @param suggestion.distance a value between 0 and 1 indicanting how conservative the
 #'   name suggestion algorithm should be. Values closer to 1 are very
 #'   conservative. Be very careful, low values can give wrong suggestions.
 #' @details The returned data frame will contain a variable number of rows and 
