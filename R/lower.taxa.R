@@ -11,11 +11,11 @@
 
 lower.taxa <- function(taxon, accepted = TRUE) {
   taxon <- fixCase(trim(taxon))
-  where <- apply(all.taxa[, c("family", "genus")], 2, function(x) grepl(paste("^", taxon, "$", sep = ""), x))
-  where <- rowSums(where) == 1L
+  matches <- apply(all.taxa[, c("family", "genus")], 2, function(x) grepl(paste("^", taxon, "$", sep = ""), x))
+  matches <- rowSums(matches) == 1L
   if (accepted) {
-    all.taxa[where & all.taxa$taxon.status == "accepted", "search.str"]
+    all.taxa$search.str[with(all.taxa, matches & taxon.status == "accepted" & !is.na(taxon.status))]
   } else {
-    all.taxa[where, "search.str"]
+    all.taxa$search.str[matches]
   }
 }
