@@ -10,7 +10,7 @@ shinyUI(fluidPage(
                  checkboxInput("vernacular", label = "Vernacular names", value = FALSE),
                  checkboxInput("states", label = "Occurrence", value = FALSE),
                  checkboxInput("establishment", label = "Establishment", value = FALSE),
-                 sliderInput("distance", label = "Suggestion conservativeness",
+                 sliderInput("distance", label = "Suggestion conservativeness (lower values are less conservative)",
                              min = 0, max = 1, value = 0.9),
                  tags$form(
                    tags$textarea(id="taxa", rows=16, cols=5, "Miconia albicans\nMyrcia lingua\nCofea arabica"),
@@ -27,7 +27,7 @@ shinyUI(fluidPage(
               " project. Please cite them accordingly. Send your suggestions and report bugs to Gustavo Carvalho at gustavo.bio@gmail.com."
               ),
               h5("Usage"),
-              p("Usage is simple: paste your taxa without authors in the textbox and hit submit. Click on the id to open the species page on the Brazilian Flora Checklist. There is a download button below to export data as a quoted csv file."),
+              p("Usage is simple: paste your taxa without authors in the textbox and hit submit. There is a download button below to export data as a quoted csv file."),
               dataTableOutput(outputId="contents"),
               downloadButton('downloadData', 'Download results in csv format')
     ))

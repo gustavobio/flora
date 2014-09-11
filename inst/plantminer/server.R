@@ -26,11 +26,15 @@ shinyServer(function(input, output) {
       }
     )
     
-    links <- 
-      paste("<a target=\"_blank\" href = \"http://floradobrasil.jbrj.gov.br/jabot/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB", res$id, "\">", res$id,"</a>", sep = "")
-    links <- gsub("FBNA", NA, links)
-    out <- data.frame(id = links, res[-1])
+    links.flora <- 
+      paste("<a target=\"_blank\" href = \"http://floradobrasil.jbrj.gov.br/jabot/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB", res$id, "\">", "FloraBR","</a>", sep = "")
+    #links.flora <- gsub("FBNA", NA, links.flora)
+    links.flora[grep("NA", links.flora)] <- ""
+    links.splink <- 
+      paste("<a target=\"_blank\" href = \"http://www.splink.org.br/search?sciname=", res$search.str, "\">", "spLink","</a>", sep = "")
+    links.splink[grep("NA", links.splink)] <- ""
+    out <- data.frame(link.out = paste(links.flora, "<br/>", links.splink), res[-1])
     names(out) <- gsub("\\.", " ", names(out))
-    out    
+    out
   }, options = list(bFilter = TRUE))
 })
