@@ -33,7 +33,10 @@ shinyServer(function(input, output) {
     links.splink <- 
       paste("<a target=\"_blank\" href = \"http://www.splink.org.br/search?sciname=", res$search.str, "\">", "spLink","</a>", sep = "")
     links.splink[grep("NA", links.splink)] <- ""
-    out <- data.frame(link.out = paste(links.flora, "<br/>", links.splink), res[-1])
+    links.splink.images <- 
+      paste("<a target=\"_blank\" href = \"http://www.splink.org.br/showImages?size=thumb&w=1258&h=317&ts_genus=", res$search.str, "\">", "Images","</a>", sep = "")
+    links.splink.images[grep("NA", links.splink.images)] <- ""
+    out <- data.frame(link.out = paste(links.flora, "<br/>", links.splink, "<br/>", links.splink.images), res[-1])
     names(out) <- gsub("\\.", " ", names(out))
     out
   }, options = list(bFilter = TRUE))
