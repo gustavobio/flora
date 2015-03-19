@@ -15,6 +15,7 @@
 #' @param states include occurrence data?
 #' @param establishment include the establishment type (native, cultivated or 
 #'   naturalized)?
+#' @param threat.status show conservation status according to CNC 2013?
 #' @param drop NULL or character vector with names of columns with taxonomic
 #'   information to be removed from the returned data frame. Available names: 
 #'   "id", "scientific.name", "accepted.name", "family", "genus",
@@ -22,13 +23,13 @@
 #'   "taxon.status", "name.status", and "search.str".
 #' @param suggestion.distance a value between 0 and 1 indicanting how conservative the
 #'   name suggestion algorithm should be. Values closer to 1 are very
-#'   conservative. Be very careful, low values can give wrong suggestions.
+#'   conservative. Be very careful, lower values can give wrong suggestions.
 #' @details The returned data frame will contain a variable number of rows and 
 #'   columns depending on how the function was called. For instance, since there
 #'   might be more than one vernacular name for each taxon, some rows
 #'   will be duplicated if \code{vernacular} is set to \code{TRUE}. All misspelled taxa
 #'   are automatically corrected if the function can come up with a reasonable
-#'   guess for the name.
+#'   guess for the name. Conservation status follows the IUCN nomenclature.
 #' @return a data frame
 #' @export
 #' @examples 
@@ -39,7 +40,7 @@
 #' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
-                      establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
+                      establishment = FALSE, threat.status = TRUE, drop = c("authorship", "genus", "specific.epiteth", 
                                                       "infra.epiteth", "name.status"), suggestion.distance = 0.9) 
 {
   taxa <- trim(taxa)
@@ -190,6 +191,9 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   if (establishment) {
     res <- merge(res, distribution[, c("id", "establishment")], 
                  by = "id", all.x = TRUE)
+  }
+  if (threat.status) {
+    res <- merge(res, status_cnc2013[, c("id", "threat.status")], by = "id", all.x = TRUE)
   }
   res
 }

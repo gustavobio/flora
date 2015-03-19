@@ -15,6 +15,7 @@ shinyServer(function(input, output) {
                       vernacular = input$vernacular, 
                       states = input$states, 
                       establishment = input$establishment,
+                      threat.status = input$threat.status,
                       suggestion.distance = input$distance)
     }
     output$downloadData <- downloadHandler(

@@ -10,6 +10,7 @@ shinyUI(fluidPage(
                  checkboxInput("vernacular", label = "Vernacular names", value = FALSE),
                  checkboxInput("states", label = "Occurrence", value = FALSE),
                  checkboxInput("establishment", label = "Establishment", value = FALSE),
+                 checkboxInput("threat.status", label = "Conservation status", value = TRUE),
                  sliderInput("distance", label = "Suggestion conservativeness (lower values are less conservative)",
                              min = 0, max = 1, value = 0.9),
                  tags$form(
