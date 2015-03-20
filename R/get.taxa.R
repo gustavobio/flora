@@ -106,7 +106,6 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     nrow.synonym <- nrow(synonym)
     if (nrow.synonym > 0L) {
       if (replace.synonyms) {
-        ## ver aqui pq pode ser que as relações não sejam de nome aceito e sim sinônimos
         related <- relationships[with(relationships, {which(related.id %in% synonym$id)}), ]   
         accepted <- all.taxa[with(all.taxa, {
           which(id %in% related$id & taxon.status == "accepted")
@@ -174,26 +173,26 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   }
   if (life.form) {
     res <- merge(res, species.profiles[, c("id", "life.form")], 
-                 by = "id", all.x = TRUE)
+                 by = "id", all.x = TRUE, sort = FALSE)
   }
   if (habitat) {
     res <- merge(res, species.profiles[, c("id", "habitat")], 
-                 by = "id", all.x = TRUE)
+                 by = "id", all.x = TRUE, sort = FALSE)
   }
   if (vernacular) {
     res <- merge(res, vernacular.names[, c("id", "vernacular.name", 
-                                           "locality")], by = "id", all.x = TRUE)
+                                           "locality")], by = "id", all.x = TRUE, sort = FALSE)
   }
   if (states) {
     res <- merge(res, distribution[, c("id", "occurrence")], 
-                 by = "id", all.x = TRUE)
+                 by = "id", all.x = TRUE, sort = FALSE)
   }
   if (establishment) {
     res <- merge(res, distribution[, c("id", "establishment")], 
-                 by = "id", all.x = TRUE)
+                 by = "id", all.x = TRUE, sort = FALSE)
   }
   if (threat.status) {
-    res <- merge(res, status_cnc2013[, c("id", "threat.status")], by = "id", all.x = TRUE)
+    res <- merge(res, status_cnc2013, by = "search.str", all.x = TRUE, sort = FALSE)
   }
   res
 }
