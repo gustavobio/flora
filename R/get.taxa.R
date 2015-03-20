@@ -15,12 +15,11 @@
 #' @param states include occurrence data?
 #' @param establishment include the establishment type (native, cultivated or 
 #'   naturalized)?
-#' @param threat.status show conservation status according to CNC 2013?
 #' @param drop NULL or character vector with names of columns with taxonomic
 #'   information to be removed from the returned data frame. Available names: 
 #'   "id", "scientific.name", "accepted.name", "family", "genus",
 #'   "specific.epiteth", "infra.epiteth", "taxon.rank", "authorship",
-#'   "taxon.status", "name.status", and "search.str".
+#'   "taxon.status", "name.status", "threat.status", and "search.str".
 #' @param suggestion.distance a value between 0 and 1 indicanting how conservative the
 #'   name suggestion algorithm should be. Values closer to 1 are very
 #'   conservative. Be very careful, lower values can give wrong suggestions.
@@ -40,7 +39,7 @@
 #' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
-                      establishment = FALSE, threat.status = TRUE, drop = c("authorship", "genus", "specific.epiteth", 
+                      establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
                                                       "infra.epiteth", "name.status"), suggestion.distance = 0.9) 
 {
   taxa <- trim(taxa)
@@ -190,9 +189,6 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   if (establishment) {
     res <- merge(res, distribution[, c("id", "establishment")], 
                  by = "id", all.x = TRUE, sort = FALSE)
-  }
-  if (threat.status) {
-    res <- merge(res, status_cnc2013, by = "search.str", all.x = TRUE, sort = FALSE)
   }
   res
 }
