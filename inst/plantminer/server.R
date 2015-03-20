@@ -26,18 +26,18 @@ shinyServer(function(input, output) {
       }
     )
     
-    links.flora <- 
-      paste("<a target=\"_blank\" href = \"http://floradobrasil.jbrj.gov.br/jabot/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB", res$id, "\">", "FloraBR","</a>", sep = "")
+    #links.flora <- 
+    #  paste("<a target=\"_blank\" href = \"http://floradobrasil.jbrj.gov.br/jabot/listaBrasil/FichaPublicaTaxonUC/FichaPublicaTaxonUC.do?id=FB", res$id, "\">", "FloraBR","</a>", sep = "")
     #links.flora <- gsub("FBNA", NA, links.flora)
-    links.flora[grep("NA", links.flora)] <- ""
-    links.splink <- 
-      paste("<a target=\"_blank\" href = \"http://www.splink.org.br/search?sciname=", res$search.str, "\">", "spLink","</a>", sep = "")
-    links.splink[grep("NA", links.splink)] <- ""
-    links.splink.images <- 
-      paste("<a target=\"_blank\" href = \"http://www.splink.org.br/showImages?size=thumb&w=1258&h=317&ts_genus=", res$search.str, "\">", "Images","</a>", sep = "")
-    links.splink.images[grep("NA", links.splink.images)] <- ""
-    out <- data.frame(link.out = paste(links.flora, "<br/>", links.splink, "<br/>", links.splink.images), res[-1])
+    #links.flora[grep("NA", links.flora)] <- ""
+    #links.splink <- 
+    #  paste("<a target=\"_blank\" href = \"http://www.splink.org.br/search?sciname=", res$search.str, "\">", "spLink","</a>", sep = "")
+    #links.splink[grep("NA", links.splink)] <- ""
+    #links.splink.images <- 
+    #  paste("<a target=\"_blank\" href = \"http://www.splink.org.br/showImages?size=thumb&w=1258&h=317&ts_genus=", res$search.str, "\">", "Images","</a>", sep = "")
+    #links.splink.images[grep("NA", links.splink.images)] <- ""
+    out <- res[-1]
     names(out) <- gsub("\\.", " ", names(out))
     out
-  }, options = list(bFilter = TRUE))
+  }, options = list(searching = TRUE))
 })
