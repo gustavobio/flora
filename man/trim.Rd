@@ -16,6 +16,8 @@ a character vector
 Remove duplicate and misplaced whitespace characters
 }
 \examples{
+\dontrun{
 trim("   Myrcia  lingua")
+}
 }
 

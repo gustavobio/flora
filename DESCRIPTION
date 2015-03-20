@@ -11,8 +11,4 @@ Imports:
 Description: Tools to quickly compile taxonomic and distribution data from
     the Brazilian Flora Checklist.
 License: GPL (>= 2)
-SysDataCompression: gzip
-Packaged: 2014-05-29 23:18:17 UTC; ewpnpwek
-NeedsCompilation: no
-Repository: CRAN
-Date/Publication: 2014-05-30 01:25:42
+BugReports: http://www.github.com/gustavobio/flora

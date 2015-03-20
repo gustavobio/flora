@@ -6,8 +6,10 @@
 #' @export
 #' @return a character vector
 #' @examples
+#' \dontrun{
 #' remove.authors("Coffea arabica L.")
 #' remove.authors("Chrysophyllum argenteum subsp. nitidum (G.F.W.Meyer) T.D.Penn.")
+#' }
 remove.authors <- function(taxon) {
   #taxon <- iconv(taxon, to = "ASCII//TRANSLIT"
   taxon <- trim(taxon)

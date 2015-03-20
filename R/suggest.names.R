@@ -15,8 +15,10 @@
 #' @export
 #' @return A character vector or \code{NA}
 #' @examples
+#' \dontrun{
 #' suggest.names("Cofea arabyca")
 #' suggest.names("Myrcia bela")
+#' }
 suggest.names <-
   function(taxon, max.distance = 0.75, return.na = TRUE, ignore.words = NULL) {
     #taxon <- iconv(taxon, to = "ASCII//TRANSLIT")

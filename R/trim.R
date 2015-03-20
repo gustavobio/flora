@@ -6,7 +6,9 @@
 #' @export
 #' @return a character vector
 #' @examples
+#' \dontrun{
 #' trim("   Myrcia  lingua")
+#' }
 trim <- function(taxon) {
   taxon <- gsub("\\t", " ", taxon)
   taxon <- gsub("\\s+", " ", taxon)

@@ -17,8 +17,10 @@ This function standardizes taxa names. It is used mainly internally, but might b
 helpful to the end user in some situations.
 }
 \examples{
+\dontrun{
 standardize.names("Miconia sp 01")
 standardize.names("Miconia Sp 2")
 standardize.names("Sp18")
+}
 }
 

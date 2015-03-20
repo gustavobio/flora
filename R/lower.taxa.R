@@ -6,8 +6,10 @@
 #' @param accepted list only accepted names?
 #' @export
 #' @examples
+#' \dontrun{
 #' lower.taxa("Acosmium")
 #' lower.taxa("Zygophyllaceae")
+#' }
 
 lower.taxa <- function(taxon, accepted = TRUE) {
   taxon <- fixCase(trim(taxon))

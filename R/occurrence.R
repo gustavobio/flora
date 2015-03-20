@@ -13,6 +13,7 @@
 #' @note List of abbreviations: \url{http://en.wikipedia.org/wiki/States_of_Brazil}
 #' @return a data frame
 #' @examples
+#' \dontrun{
 #' occ.any <- occurrence(c("SP", "BA", "MG"), type = "any")
 #' occ.only <- occurrence(c("SP", "BA", "MG"), type = "only")
 #' occ.all <- occurrence(c("SP", "BA", "MG"), type = "all")
@@ -22,20 +23,25 @@
 #' head(occ.only)
 #' head(occ.all)
 #' head(occ.taxa)
+#' }
 occurrence <- function(states, type = c("any", "only", "all"), taxa = NULL) {
   type <- match.arg(type)
-  states <- sapply(trim(states), toupper)
-  res <- lapply(occurrences, match, states)
+  states <- sort(sapply(trim(states), toupper))
+  #res <- lapply(occurrences, match, states)
   if (type == "any") {
-    res <- lapply(res, function(x) any(!is.na(x)))
+    #res <- lapply(res, function(x) any(!is.na(x)))
+    res <- subset(distribution, grepl(paste(states, collapse = "|"), occurrence))
   }
   if (type == "only") {
-    res <- lapply(res, function(x) length(x) == length(states) && !any(is.na(x)))
+    res <- subset(distribution, grepl(paste("^", paste(states, collapse = ";"), "$", sep = ""), occurrence))
   }
   if (type == "all") {
-    res <- lapply(res, function(x) sum(!is.na(x)) >= length(states))
+    res <- subset(distribution, grepl(paste(states, collapse = ".*"), occurrence))
   }
-  res <- distribution[unlist(res), ]
+  # res <- distribution[unlist(res), ]
+  if (nrow(res) == 0) {
+    return(NA)
+  }
   if (is.null(taxa)) {
     merge(all.taxa[, c("id", "family", "search.str")], res[, c("id", "occurrence")], by = "id")
   } else {

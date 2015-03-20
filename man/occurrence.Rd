@@ -27,6 +27,7 @@ Find the taxa that occur in a given state of Brazil.
 List of abbreviations: \url{http://en.wikipedia.org/wiki/States_of_Brazil}
 }
 \examples{
+\dontrun{
 occ.any <- occurrence(c("SP", "BA", "MG"), type = "any")
 occ.only <- occurrence(c("SP", "BA", "MG"), type = "only")
 occ.all <- occurrence(c("SP", "BA", "MG"), type = "all")
@@ -36,5 +37,6 @@ head(occ.any)
 head(occ.only)
 head(occ.all)
 head(occ.taxa)
+}
 }
 

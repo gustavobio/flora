@@ -16,7 +16,9 @@ a character vector
 This attempts to remove the authorities of a taxonomic name.
 }
 \examples{
+\dontrun{
 remove.authors("Coffea arabica L.")
 remove.authors("Chrysophyllum argenteum subsp. nitidum (G.F.W.Meyer) T.D.Penn.")
+}
 }
 

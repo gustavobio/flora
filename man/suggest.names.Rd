@@ -29,7 +29,9 @@ This function tries to suggest a valid name according to the Brazilian Flora
 Checklist using a possibly incorrect one as a starting point.
 }
 \examples{
+\dontrun{
 suggest.names("Cofea arabyca")
 suggest.names("Myrcia bela")
+}
 }
 

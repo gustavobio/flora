@@ -15,7 +15,9 @@ lower.taxa(taxon, accepted = TRUE)
 Get all downstream taxa from a family or genus name.
 }
 \examples{
+\dontrun{
 lower.taxa("Acosmium")
 lower.taxa("Zygophyllaceae")
+}
 }
 

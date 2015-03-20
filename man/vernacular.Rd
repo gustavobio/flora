@@ -18,7 +18,9 @@ a data frame of results or NA
 Search for taxa using vernacular names
 }
 \examples{
+\dontrun{
 vernacular("pimenta", exact = TRUE)
 vernacular("pimenta", exact = FALSE)
+}
 }
 

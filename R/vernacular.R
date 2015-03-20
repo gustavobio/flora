@@ -7,8 +7,10 @@
 #' @export
 #' @return a data frame of results or NA
 #' @examples
+#' \dontrun{
 #' vernacular("pimenta", exact = TRUE)
 #' vernacular("pimenta", exact = FALSE)
+#' }
 
 vernacular <- function(name, exact = FALSE) {
   name <- trim(name)

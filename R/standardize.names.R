@@ -7,9 +7,11 @@
 #' @return a character vector
 #' @export
 #' @examples
+#' \dontrun{
 #' standardize.names("Miconia sp 01")
 #' standardize.names("Miconia Sp 2")
 #' standardize.names("Sp18")
+#' }
 
 standardize.names <- function(taxon) {
   #taxon <- iconv(taxon, to = "ASCII//TRANSLIT")
