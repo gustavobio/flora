@@ -65,7 +65,9 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     ident <- regmatches(taxon, regexpr("\\s+sp\\.+\\w*", 
                                        taxon))
     if (length(ident) != 0L) {
-      taxon <- unlist(strsplit(taxon, " "))[1]
+      splitted.name <- unlist(strsplit(taxon, " "))
+      taxon <- splitted.name[1]
+      infra <- splitted.name[2]
     }
     found <- length(with(all.taxa, {
       which(search.str == taxon)
@@ -97,6 +99,7 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
         notes <- c(notes, "check +1 accepted")
       }
       res[index, "notes"] <- paste(notes, collapse = "|")
+      if (length(ident) != 0L) res[index, "search.str"] <- paste(res[index, "search.str"], infra)
       next
     }
     synonym <- all.taxa[with(all.taxa, {
@@ -139,6 +142,7 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
         }
       }
       res[index, "notes"] <- paste(notes, collapse = "|")
+      if (length(ident) != 0L) res[index, "search.str"] <- paste(res[index, "search.str"], infra)
       next
     }
     
@@ -162,6 +166,7 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     }
     
     res[index, "notes"] <- paste(notes, collapse = "|")
+    if (length(ident) != 0L) res[index, "search.str"] <- paste(taxa, infra)
   }
   if (is.null(drop)) {
     res <- data.frame(res, original.search, stringsAsFactors = FALSE)
