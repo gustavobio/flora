@@ -22,9 +22,9 @@ shinyUI(fluidPage(
               h5("Data"),
               p("This application is an alternative front end for the",
               tags$a(href = "http://cran.r-project.org/package=flora", "flora"),
-              "package for R. All data used here was kindly made available by the ",
+              "package for R. All data used here were kindly made available by the ",
               tags$a(href = "http://floradobrasil.jbrj.gov.br", "Brazilian Flora Checklist"),
-              " project. Please cite them accordingly. Send your suggestions and report bugs to Gustavo Carvalho at gustavo.bio@gmail.com."
+              " project. Please cite them accordingly. This version of the application uses a database snapshot downloaded on 15 March 2015. Send your suggestions and report bugs to Gustavo Carvalho at gustavo.bio@gmail.com."
               ),
               h5("Usage"),
               p("Usage is simple: paste your taxa without authors in the textbox and hit submit. There is a download button below to export data as a quoted csv file."),
