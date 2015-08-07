@@ -3,5 +3,6 @@
 .RData
 flora.Rcheck
 .Rapp.history
+flora.Rproj
 
 plumber_test.R
