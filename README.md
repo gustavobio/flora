@@ -41,10 +41,10 @@ get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"))
 1  9668 Miconia albicans (Sw.) Triana          <NA> Melastomataceae    species     accepted
 2 10699 Myrcia guianensis (Aubl.) DC.          <NA>       Myrtaceae    species     accepted
 3 24410             Coffea arabica L.          <NA>       Rubiaceae    species     accepted
-         search.str            notes  original.search
-1  Miconia albicans                  Miconia albicans
-2 Myrcia guianensis replaced synonym    Myrcia lingua
-3    Coffea arabica   was misspelled    Cofea arabica
+         search.str threat.status            notes  original.search
+1  Miconia albicans          <NA>                  Miconia albicans
+2 Myrcia guianensis            LC replaced synonym    Myrcia lingua
+3    Coffea arabica          <NA>                    Coffea arabica
 ```
 
 There are several arguments to `get.taxa`. For instance, you can get the states of Brazil where the taxa occur:
@@ -58,14 +58,14 @@ get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"), states = TRUE)
 1  9668 Miconia albicans (Sw.) Triana          <NA> Melastomataceae    species     accepted
 2 10699 Myrcia guianensis (Aubl.) DC.          <NA>       Myrtaceae    species     accepted
 3 24410             Coffea arabica L.          <NA>       Rubiaceae    species     accepted
-         search.str            notes  original.search
-1  Miconia albicans                  Miconia albicans
-2 Myrcia guianensis replaced synonym    Myrcia lingua
-3    Coffea arabica   was misspelled    Cofea arabica
+         search.str threat.status            notes  original.search
+1  Miconia albicans          <NA>                  Miconia albicans
+2 Myrcia guianensis            LC replaced synonym    Myrcia lingua
+3    Coffea arabica          <NA>                    Coffea arabica
                                                                   occurrence
-1 PB;GO;MG;RJ;AC;RR;RO;ES;PR;SP;AM;AP;PA;MS;TO;AL;SE;CE;BA;DF;MA;RN;PI;PE;MT
-2                      PE;GO;MS;MT;AC;AM;AP;PA;AL;BA;CE;RN;RS;SC;ES;MG;RJ;SP
-3                         GO;PR;SC;RS;ES;MG;RJ;MS;DF;SE;PE;CE;SP;PB;BA;AL;AC
+1 AC;AL;AM;AP;BA;CE;DF;ES;GO;MA;MG;MS;MT;PA;PB;PE;PI;PR;RJ;RN;RO;RR;SE;SP;TO
+2                      AC;AL;AM;AP;BA;CE;ES;GO;MG;MS;MT;PA;PE;RJ;RN;RS;SC;SP
+3                         AC;AL;BA;CE;DF;ES;GO;MG;MS;PB;PE;PR;RJ;RS;SC;SE;SP
 ```
 
 Other arguments include `life.form`, `habitat`, `vernacular`, and `establishment`.
