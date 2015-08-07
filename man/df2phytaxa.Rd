@@ -12,6 +12,6 @@ df2phytaxa(taxa, uppercase = TRUE)
 \item{uppercase}{logical. Should the function capitalize first letters?}
 }
 \description{
-Phylomatic format
+Convert the results of get.taxa() to the phylomatic sample format
 }
 
