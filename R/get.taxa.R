@@ -65,9 +65,9 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
     ident <- regmatches(taxon, regexpr("\\s+sp\\.+\\w*", 
                                        taxon))
     if (length(ident) != 0L) {
-      splitted.name <- unlist(strsplit(taxon, " "))
-      taxon <- splitted.name[1]
-      infra <- splitted.name[2]
+      split.name <- unlist(strsplit(taxon, " "))
+      taxon <- split.name[1]
+      infra <- split.name[2]
     }
     found <- length(with(all.taxa, {
       which(search.str == taxon)
