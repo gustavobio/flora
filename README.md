@@ -1,7 +1,7 @@
 flora
 ===
 
-This R package includes functions to query the Brazilian Flora Checklist.
+R package to query the Brazilian Flora 2020 dataset.
 
 ## Developer
 
@@ -9,7 +9,7 @@ This R package includes functions to query the Brazilian Flora Checklist.
 
 ## Data
 
-The dataset included in the package was kindly made available by the [Brazilian Flora Checklist](http://floradobrasil.jbrj.gov.br), which is a joint effort by hundreds of taxonomists to provide an improved checklist of plants and fungi that occur in Brazil.
+The dataset included in the package was kindly made available by the [Brazilian Flora 2020](http://floradobrasil.jbrj.gov.br), which is a joint effort by hundreds of taxonomists to provide an improved checklist of plants and fungi that occur in Brazil.
 
 ## Installation
 
