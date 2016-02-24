@@ -184,8 +184,7 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
                  by = "id", all.x = TRUE, sort = FALSE)
   }
   if (vernacular) {
-    res <- merge(res, vernacular.names[, c("id", "vernacular.name", 
-                                           "locality")], by = "id", all.x = TRUE, sort = FALSE)
+    res <- merge(res, vernacular.names[, c("id", "vernacular.name")], by = "id", all.x = TRUE, sort = FALSE)
   }
   if (states) {
     res <- merge(res, distribution[, c("id", "occurrence")], 
