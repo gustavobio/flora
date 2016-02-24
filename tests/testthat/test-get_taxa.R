@@ -30,3 +30,22 @@ test_that("get.taxa returns the expected values for synonyms", {
   expect_equal(myrcia_lingua$notes, "replaced synonym")
   expect_equal(myrcia_lingua$original.search, "Myrcia lingua")
 })
+
+mircia_lingua <- get.taxa("mircia lingua", suggest.names = TRUE)
+
+test_that("get.taxa is correcting misspelled names", {
+  expect_match(mircia_lingua$notes, "misspelled")
+  expect_match(mircia_lingua$scientific.name, "Myrcia guianensis")
+})
+
+tabebuia_aurea <- get.taxa("Tabebuia aurea", states = TRUE)
+
+test_that("get.taxa returns the occurrence of the taxa", {
+  expect_match(tabebuia_aurea$occurrence, "BR-")
+})
+
+casearia_sylvestris <- get.taxa("Casearia sylvestris", life.form = T, habitat = T, establishment = TRUE, states = TRUE)
+
+test_that("get.taxa returns the life forms of the taxa", {
+  expect_match(casearia_sylvestris$life.form, "Arbusto|Árvore|Subarbusto")
+})
