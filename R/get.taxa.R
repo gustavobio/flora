@@ -188,23 +188,24 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
                       stringsAsFactors = FALSE)
   }
   if (life.form) {
-    res <- merge(res, species.profiles[, c("id", "life.form")], 
-                 by = "id", all.x = TRUE, sort = FALSE)
+    res <- left_join(res, species.profiles[, c("id", "life.form")], 
+                     by = "id")
   }
   if (habitat) {
-    res <- merge(res, species.profiles[, c("id", "habitat")], 
-                 by = "id", all.x = TRUE, sort = FALSE)
+    res <- left_join(res, species.profiles[, c("id", "habitat")], 
+                     by = "id")
   }
   if (vernacular) {
-    res <- merge(res, vernacular.names[, c("id", "vernacular.name")], by = "id", all.x = TRUE, sort = FALSE)
+    res <- left_join(res, vernacular.names[, c("id", "vernacular.name")],
+                     by = "id")  
   }
   if (states) {
-    res <- merge(res, distribution[, c("id", "occurrence")], 
-                 by = "id", all.x = TRUE, sort = FALSE)
+    res <- left_join(res, distribution[, c("id", "occurrence")], 
+                     by = "id")
   }
   if (establishment) {
-    res <- merge(res, distribution[, c("id", "establishment")], 
-                 by = "id", all.x = TRUE, sort = FALSE)
+    res <- left_join(res, distribution[, c("id", "establishment")], 
+                     by = "id")
   }
   res
 }
