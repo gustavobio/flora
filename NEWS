@@ -3,6 +3,10 @@ flora 0.2.7
   
   * Updated dataset (21st Feb 2016)
   
+  * New parse option in `get.taxa` to remove authors using the GBIF parser
+  
+  * Changed the name of the data source from Brazilian Flora Checklist to Brazilian Flora 2020
+  
 flora 0.2.6
 ================
 

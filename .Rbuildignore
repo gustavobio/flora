@@ -3,3 +3,6 @@
 ^\.Rhistory
 flora\.Rcheck
 README\.md
+^\.git$
+.gitignore
+

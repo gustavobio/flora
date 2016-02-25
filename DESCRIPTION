@@ -8,7 +8,8 @@ Depends:
     R (>= 3.0.0)
 Imports:
     shiny,
-    httr
+    httr,
+    dplyr
 Description: Tools to quickly compile taxonomic and distribution data from
     the Brazilian Flora 2020 at http://floradobrasil.jbrj.gov.br/.
 License: GPL (>= 2)
