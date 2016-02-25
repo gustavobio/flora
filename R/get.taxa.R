@@ -23,6 +23,7 @@
 #' @param suggestion.distance a value between 0 and 1 indicanting how conservative the
 #'   name suggestion algorithm should be. Values closer to 1 are very
 #'   conservative. Be very careful, lower values can give wrong suggestions.
+#' @param parse Parse names through the GBIF parser to remove authors?
 #' @details The returned data frame will contain a variable number of rows and 
 #'   columns depending on how the function was called. For instance, since there
 #'   might be more than one vernacular name for each taxon, some rows
@@ -40,7 +41,8 @@
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
                       establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
-                                                      "infra.epiteth", "name.status"), suggestion.distance = 0.9) 
+                                                      "infra.epiteth", "name.status"), 
+                      suggestion.distance = 0.9, parse = FALSE) 
 {
   taxa <- trim(taxa)
   taxa <- taxa[nzchar(taxa)]
@@ -56,6 +58,16 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   for (taxon in taxa) {
     notes <- NULL
     index <- index + 1
+    if (parse) {
+      url <- "http://api.gbif.org/v1/parser/name"
+      request <- try(POST(url, body = list(taxon), encode = "json"))
+      if (inherits(request, "try-error")) {
+        warning("Couldn't connect with the GBIF data servers. Check your internet connection or try again later.")
+      } else {
+        warn_for_status(request)
+        taxon <- content(request)[[1]]$canonicalName
+      }
+    }
     taxon <- fixCase(taxon)
     uncertain <- regmatches(taxon, regexpr("[a|c]f+\\.", 
                                            taxon))
