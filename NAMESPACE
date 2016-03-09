@@ -2,6 +2,7 @@
 
 export(df2phytaxa)
 export(fixCase)
+export(get.synonyms)
 export(get.taxa)
 export(lower.taxa)
 export(occurrence)
