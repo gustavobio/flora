@@ -25,15 +25,18 @@
 #' head(occ.taxa)
 #' }
 occurrence <- function(states, type = c("any", "only", "all"), taxa = NULL) {
+  if (length(states) == 0) stop("Please provide at least one Brazilian state.")
   type <- match.arg(type)
   states <- sort(sapply(trim(states), toupper))
+  states <- paste("BR-", states, sep = "")
+  if (length(states) == 0) stop("Please provide at least one Brazilian state.")
   #res <- lapply(occurrences, match, states)
   if (type == "any") {
     #res <- lapply(res, function(x) any(!is.na(x)))
     res <- subset(distribution, grepl(paste(states, collapse = "|"), occurrence))
   }
   if (type == "only") {
-    res <- subset(distribution, grepl(paste("^", paste(states, collapse = ";"), "$", sep = ""), occurrence))
+    res <- subset(distribution, grepl(paste("^", paste(states, collapse = "\\|"), "$", sep = ""), occurrence))
   }
   if (type == "all") {
     res <- subset(distribution, grepl(paste(states, collapse = ".*"), occurrence))
