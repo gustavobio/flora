@@ -15,9 +15,9 @@
 vernacular <- function(name, exact = FALSE) {
   name <- trim(name)
   if (exact) {
-    res <- vernacular.names[grep(paste("^", name, "$", sep = ""), vernacular.names$vernacular.name, ignore.case = TRUE), c("id", "vernacular.name", "locality")]
+    res <- vernacular.names[grep(paste("^", name, "\\/", sep = ""), vernacular.names$vernacular.name, ignore.case = TRUE), ]
   } else {
-    res <- vernacular.names[agrep(name, vernacular.names$vernacular.name, ignore.case = TRUE), c("id", "locality", "vernacular.name")]
+    res <- vernacular.names[agrep(name, vernacular.names$vernacular.name, ignore.case = TRUE), ]
   }
   if (nrow(res) == 0L) {
     NA
