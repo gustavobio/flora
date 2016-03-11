@@ -18,6 +18,8 @@ The dataset included in the package was kindly made available by the [Brazilian 
 ```coffee
 install.packages("devtools")
 install.packages("shiny")
+install.packages("dplyr")
+install.packages("httr")
 library("devtools")
 ```
 
