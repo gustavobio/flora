@@ -29,7 +29,7 @@ df2phytaxa <- function(taxa, uppercase = TRUE) {
     }
     if (taxon.rank %in% c("subspecies", "variety")) {
       spp <- taxa[i, "search.str"]
-      taxon <- gsub("\\.", "", gsub(" ", "_", paste(family, spp, sep = "/")))
+      taxon <- gsub("\\.", "", gsub(" ", "_", paste(family, strsplit(spp, " ")[[1]][1], spp, sep = "/")))
     }
     res[length(res) + 1] <- taxon
   }
