@@ -7,7 +7,7 @@
 #'
 #' @examples
 #' \dontrun {
-#' taxa <- get.taxa(c("Myrcia guianensis", "bleh", "Xylopia", "Miconia albicans", "bleh", "Poa annua")
+#' taxa <- get.taxa(c("Myrcia guianensis", "bleh", "Xylopia", "Miconia albicans", "bleh", "Poa annua"))
 #' get_domains(taxa)
 #' }
 get_domains <- function(taxa) {
