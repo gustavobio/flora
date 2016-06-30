@@ -11,6 +11,8 @@ Imports:
     httr,
     dplyr,
     utils
+Suggests:
+    jsonlite
 Description: Tools to quickly compile taxonomic and distribution data from
     the Brazilian Flora 2020 at http://floradobrasil.jbrj.gov.br/.
 License: GPL (>= 2)
