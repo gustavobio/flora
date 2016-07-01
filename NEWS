@@ -1,3 +1,12 @@
+flora 0.2.8
+================
+  * New function to list all the synonyms of a name (`get.synonyms`)
+  
+  * New functions to get phytogeographic domains (`get_domain`)
+  
+  * Removed shiny from imports
+
+  
 flora 0.2.7
 ================
   
