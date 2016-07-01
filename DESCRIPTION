@@ -1,13 +1,12 @@
 Package: flora
 Type: Package
 Title: Tools for Interacting with the Brazilian Flora 2020
-Version: 0.2.7
+Version: 0.2.8
 Author: Gustavo Carvalho
 Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
 Depends:
     R (>= 3.0.0)
 Imports:
-    shiny,
     httr,
     dplyr,
     utils,
