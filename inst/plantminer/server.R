@@ -1,9 +1,4 @@
-if (!requireNamespace("pkg", quietly = TRUE)) {
-  stop("shiny needed for this function to work. Please install it.",
-       call. = FALSE)
-} else {
-  library(shiny)
-}
+library(shiny)
 library(flora)
 ex <- get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"))
 shinyServer(function(input, output) {

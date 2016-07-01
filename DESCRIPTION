@@ -11,11 +11,12 @@ Imports:
     dplyr,
     utils,
     jsonlite
+Suggests:
+    testthat,
+    shiny
 Description: Tools to quickly compile taxonomic and distribution data from
     the Brazilian Flora 2020 at http://floradobrasil.jbrj.gov.br/.
 License: GPL (>= 2)
 URL: http://www.github.com/gustavobio/flora
 BugReports: http://www.github.com/gustavobio/flora/issues
-Suggests:
-    testthat
 RoxygenNote: 5.0.1
