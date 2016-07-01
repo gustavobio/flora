@@ -7,7 +7,7 @@
 #' 
 #' @return a character vector
 #' @export
-#' @examples 
+#' @examples
 #' \dontrun{
 #' synonyms("Myrcia lingua")
 #' }
@@ -21,7 +21,7 @@ get.synonyms <- function(taxon) {
   }
   else {
     synonyms <- relationships[with(relationships, {
-      related.id == processed_taxon$id & grepl("É sinônimo", relationship)
+      related.id == processed_taxon$id & grepl("\u00C9 sin\u00F4nimo", relationship)
       }), ]
   }
   if (NROW(synonyms) == 0) {

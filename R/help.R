@@ -17,7 +17,8 @@
 #' flora now holds all the data it needs. All functions can be used whilst offline.
 #' @docType package
 #' @import shiny httr dplyr
-#' @importFrom "utils" "adist"
+#' @importFrom utils adist
+#' @importFrom jsonlite fromJSON
 #' @name flora
 #' @aliases flora flora-package
 NULL

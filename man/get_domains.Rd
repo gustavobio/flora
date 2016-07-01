@@ -7,7 +7,7 @@
 get_domains(taxa)
 }
 \arguments{
-\item{taxa}{}
+\item{taxa}{A data frame with taxon names as returned by get.taxa()}
 }
 \value{
 A data frame as returned by get.taxa with an extra column named domain.
@@ -16,8 +16,8 @@ A data frame as returned by get.taxa with an extra column named domain.
 Get the phytogeographic domain of a list of taxa
 }
 \examples{
-\dontrun {
-taxa <- get.taxa(c("Myrcia guianensis", "bleh", "Xylopia", "Miconia albicans", "bleh", "Poa annua")
+\dontrun{
+taxa <- get.taxa(c("Myrcia guianensis", "bleh", "Xylopia", "Miconia albicans", "bleh", "Poa annua"))
 get_domains(taxa)
 }
 }
