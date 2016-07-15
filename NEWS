@@ -2,7 +2,7 @@ flora 0.2.8
 ================
   * New function to list all the synonyms of a name (`get.synonyms`)
   
-  * New functions to get phytogeographic domains (`get_domain`)
+  * New functions to get phytogeographic domains (`get_domains`)
   
   * Removed shiny from imports
 
