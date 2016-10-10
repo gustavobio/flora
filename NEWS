@@ -1,3 +1,7 @@
+flora 0.2.9
+================
+  * New function to retrieve information on vegetation types for a list of taxa (`get_vegtype`)
+
 flora 0.2.8
 ================
   * New function to list all the synonyms of a name (`get.synonyms`)
@@ -6,7 +10,6 @@ flora 0.2.8
   
   * Removed shiny from imports
 
-  
 flora 0.2.7
 ================
   
