@@ -31,10 +31,13 @@ suggest.names <-
     if (length(ident) != 0L) taxon <- unlist(strsplit(taxon, " "))[1]
     if (!nzchar(taxon)) return(NA)
     first.letter <- strsplit(taxon, "")[[1]][1]
-    species.first.letter <- all.taxa$search.str[grep(paste("^", first.letter, sep = ""), all.taxa$search.str)]
+    species.first.letter <- all.taxa$search.str[
+      grepl(paste("^", first.letter, sep = ""), 
+            all.taxa$search.str, fixed  = F, perl = T, useBytes = T)]
     l1 <- length(taxon)
     l2 <- length(species.first.letter)
-    out <- adist(taxon, species.first.letter)
+    #out <- adist(taxon, species.first.letter)
+    out <- stringdist(taxon, species.first.letter)
     distance <- 1 - (out/pmax(nchar(taxon), 
                                   nchar(species.first.letter)))
     max.dist <- max(distance, na.rm = TRUE)

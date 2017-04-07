@@ -1,7 +1,7 @@
 Package: flora
 Type: Package
 Title: Tools for Interacting with the Brazilian Flora 2020
-Version: 0.2.8
+Version: 0.3.0
 Author: Gustavo Carvalho
 Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
 Depends:
@@ -10,7 +10,8 @@ Imports:
     httr,
     dplyr,
     utils,
-    jsonlite
+    jsonlite,
+    stringdist
 Suggests:
     testthat,
     shiny

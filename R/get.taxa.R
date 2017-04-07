@@ -39,19 +39,19 @@
 #' get.taxa(plants, life.form = TRUE, establishment = TRUE)
 #' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
-                      life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
-                      establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
-                                                      "infra.epiteth", "name.status"), 
-                      suggestion.distance = 0.9, parse = FALSE) 
+                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
+                       establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
+                                                       "infra.epiteth", "name.status"), 
+                       suggestion.distance = 0.9, parse = FALSE) 
 {
   taxa <- trim(taxa)
   taxa <- taxa[nzchar(taxa)]
   if (length(taxa) == 0L) 
     stop("No valid names provided.")
   original.search <- taxa
-  ncol.taxa <- ncol(all.taxa)
+  ncol.taxa <- ncol(all.taxa.accepted)
   res <- data.frame(matrix(vector(), length(taxa), ncol.taxa + 
-                             1, dimnames = list(c(), c(names(all.taxa), "notes"))), 
+                             1, dimnames = list(c(), c(names(all.taxa.accepted), "notes"))), 
                     stringsAsFactors = FALSE)
   minus.notes <- seq_len(ncol.taxa)
   index <- 0
@@ -81,9 +81,14 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
       taxon <- split.name[1]
       infra <- split.name[2]
     }
-    found <- length(with(all.taxa, {
+    found <- length(with(all.taxa.accepted, {
       which(search.str == taxon)
     })) > 0L
+    if (!found) {
+      found <- length(with(all.taxa.synonyms, {
+        which(search.str == taxon)
+      })) > 0L
+    }
     if (!found) {
       if (suggest.names) {
         taxon <- suggest.names(taxon, max.distance = suggestion.distance)
@@ -100,8 +105,8 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
         notes <- "was misspelled"
       }
     }
-    accepted <- all.taxa[with(all.taxa, {
-      which(search.str == taxon & taxon.status == "accepted")
+    accepted <- all.taxa.accepted[with(all.taxa.accepted, {
+      which(search.str == taxon)
     }), ]
     if (nrow(accepted) > 0) {
       if (nrow(accepted) == 1L) {
@@ -114,15 +119,15 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
       if (length(ident) != 0L) res[index, "search.str"] <- paste(res[index, "search.str"], infra)
       next
     }
-    synonym <- all.taxa[with(all.taxa, {
-      which(search.str == taxon & taxon.status == "synonym")
+    synonym <- all.taxa.synonyms[with(all.taxa.synonyms, {
+      which(search.str == taxon)
     }), ]
     nrow.synonym <- nrow(synonym)
     if (nrow.synonym > 0L) {
       if (replace.synonyms) {
         related <- relationships[with(relationships, {which(related.id %in% synonym$id)}), ]   
-        accepted <- all.taxa[with(all.taxa, {
-          which(id %in% related$id & taxon.status == "accepted")
+        accepted <- all.taxa.accepted[with(all.taxa.accepted, {
+          which(id %in% related$id)
         }), ]
         nrow.accepted <- nrow(accepted)
         if (nrow.accepted == 0L) {
@@ -158,8 +163,8 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
       next
     }
     
-    undefined <- all.taxa[with(all.taxa, {
-      which(search.str == taxon & is.na(taxon.status))
+    undefined <- all.taxa.undefined[with(all.taxa.undefined, {
+      which(search.str == taxon)
     }), ]
     
     nrow.undefined <- nrow(undefined)
@@ -189,23 +194,23 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   }
   if (life.form) {
     res <- dplyr::left_join(res, species.profiles[, c("id", "life.form")], 
-                     by = "id")
+                            by = "id")
   }
   if (habitat) {
     res <- dplyr::left_join(res, species.profiles[, c("id", "habitat")], 
-                     by = "id")
+                            by = "id")
   }
   if (vernacular) {
     res <- dplyr::left_join(res, vernacular.names[, c("id", "vernacular.name")],
-                     by = "id")  
+                            by = "id")  
   }
   if (states) {
     res <- dplyr::left_join(res, distribution[, c("id", "occurrence")], 
-                     by = "id")
+                            by = "id")
   }
   if (establishment) {
     res <- dplyr::left_join(res, distribution[, c("id", "establishment")], 
-                     by = "id")
+                            by = "id")
   }
   res
 }

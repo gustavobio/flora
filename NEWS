@@ -1,3 +1,7 @@
+flora 0.3.0
+================
+  * Much improved performance
+  
 flora 0.2.9
 ================
   * New function to retrieve information on vegetation types for a list of taxa (`get_vegtype`)

@@ -16,7 +16,7 @@
 #' }
 #' flora now holds all the data it needs. All functions can be used whilst offline.
 #' @docType package
-#' @import httr dplyr
+#' @import httr dplyr stringdist
 #' @importFrom utils adist
 #' @importFrom jsonlite fromJSON
 #' @name flora
