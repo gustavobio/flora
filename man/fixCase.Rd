@@ -17,4 +17,3 @@ fixCase("myrcia lingua")
 fixCase("Myrcia Lingua")
 fixCase("COFFEA ARABICA")
 }
-

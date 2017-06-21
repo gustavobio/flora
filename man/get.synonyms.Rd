@@ -20,4 +20,3 @@ This function returns all the synonyms of a given taxon according to the Brazili
 synonyms("Myrcia lingua")
 }
 }
-

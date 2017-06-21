@@ -4,6 +4,7 @@
 \name{flora}
 \alias{flora}
 \alias{flora-package}
+\alias{flora-package}
 \title{Package flora}
 \description{
 Collect data from the Brazilian Flora checklist
@@ -23,4 +24,3 @@ about the correct spelling of a name. With flora, however, you can:
 }
 flora now holds all the data it needs. All functions can be used whilst offline.
 }
-

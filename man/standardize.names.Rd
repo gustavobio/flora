@@ -23,4 +23,3 @@ standardize.names("Miconia Sp 2")
 standardize.names("Sp18")
 }
 }
-

@@ -10,4 +10,3 @@ A small character vector containing 16 plant names. Contains accepted names,
 synonyms, and misspelled taxa.
 }
 \keyword{datasets}
-

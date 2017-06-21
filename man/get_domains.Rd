@@ -21,4 +21,3 @@ taxa <- get.taxa(c("Myrcia guianensis", "bleh", "Xylopia", "Miconia albicans", "
 get_domains(taxa)
 }
 }
-

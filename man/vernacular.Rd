@@ -23,4 +23,3 @@ vernacular("pimenta", exact = TRUE)
 vernacular("pimenta", exact = FALSE)
 }
 }
-

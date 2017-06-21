@@ -20,4 +20,3 @@ Remove duplicate and misplaced whitespace characters
 trim("   Myrcia  lingua")
 }
 }
-

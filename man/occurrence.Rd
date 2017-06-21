@@ -39,4 +39,3 @@ head(occ.all)
 head(occ.taxa)
 }
 }
-

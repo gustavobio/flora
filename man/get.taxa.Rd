@@ -65,4 +65,3 @@ get.taxa(plants)
 get.taxa(plants, life.form = TRUE, establishment = TRUE)
 }
 }
-

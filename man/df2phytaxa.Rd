@@ -14,4 +14,3 @@ df2phytaxa(taxa, uppercase = TRUE)
 \description{
 Convert the results of get.taxa() to the phylomatic sample format
 }
-
