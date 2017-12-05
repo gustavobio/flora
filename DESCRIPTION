@@ -16,7 +16,7 @@ Suggests:
     testthat,
     shiny
 Description: Tools to quickly compile taxonomic and distribution data from
-    the Brazilian Flora 2020 at http://floradobrasil.jbrj.gov.br/.
+    the Brazilian Flora 2020.
 License: GPL (>= 2)
 URL: http://www.github.com/gustavobio/flora
 BugReports: http://www.github.com/gustavobio/flora/issues
