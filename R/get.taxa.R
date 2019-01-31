@@ -11,6 +11,7 @@
 #' @param suggest.names should the function try to correct misspelled names?
 #' @param life.form include the life form of the taxon?
 #' @param habitat include the habitat of the taxon?
+#' @param vegetation.type include the listed vegetation types?
 #' @param vernacular include vernacular names and localities?
 #' @param states include occurrence data?
 #' @param establishment include the establishment type (native, cultivated or 
@@ -39,7 +40,7 @@
 #' get.taxa(plants, life.form = TRUE, establishment = TRUE)
 #' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
-                       life.form = FALSE, habitat = FALSE, vernacular = FALSE, states = FALSE, 
+                       life.form = FALSE, habitat = FALSE, vegetation.type = FALSE, vernacular = FALSE, states = FALSE, 
                        establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
                                                        "infra.epiteth", "name.status"), 
                        suggestion.distance = 0.9, parse = FALSE) 
@@ -198,6 +199,10 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   }
   if (habitat) {
     res <- dplyr::left_join(res, species.profiles[, c("id", "habitat")], 
+                            by = "id")
+  }
+  if (vegetation.type) {
+    res <- dplyr::left_join(res, species.profiles[, c("id", "vegetation.type")], 
                             by = "id")
   }
   if (vernacular) {

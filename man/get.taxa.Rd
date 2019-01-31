@@ -5,10 +5,10 @@
 \title{Get plant taxonomical and distribution data}
 \usage{
 get.taxa(taxa, replace.synonyms = TRUE, suggest.names = TRUE,
-  life.form = FALSE, habitat = FALSE, vernacular = FALSE,
-  states = FALSE, establishment = FALSE, drop = c("authorship", "genus",
-  "specific.epiteth", "infra.epiteth", "name.status"),
-  suggestion.distance = 0.9, parse = FALSE)
+  life.form = FALSE, habitat = FALSE, vegetation.type = FALSE,
+  vernacular = FALSE, states = FALSE, establishment = FALSE,
+  drop = c("authorship", "genus", "specific.epiteth", "infra.epiteth",
+  "name.status"), suggestion.distance = 0.9, parse = FALSE)
 }
 \arguments{
 \item{taxa}{a character vector containing one or more taxa, without authors 
@@ -21,6 +21,8 @@ see \code{\link{remove.authors}} if you have a list with authorities}
 \item{life.form}{include the life form of the taxon?}
 
 \item{habitat}{include the habitat of the taxon?}
+
+\item{vegetation.type}{include the listed vegetation types?}
 
 \item{vernacular}{include vernacular names and localities?}
 
