@@ -4,7 +4,6 @@
 \name{flora}
 \alias{flora}
 \alias{flora-package}
-\alias{flora-package}
 \title{Package flora}
 \description{
 Collect data from the Brazilian Flora checklist
