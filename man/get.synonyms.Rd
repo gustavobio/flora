@@ -4,10 +4,12 @@
 \alias{get.synonyms}
 \title{List all synonyms of a given taxa}
 \usage{
-get.synonyms(taxon)
+get.synonyms(taxon, fix = FALSE)
 }
 \arguments{
 \item{taxon}{a character vector containing a name.}
+
+\item{fix}{should the function fix issues (synonyms, mispelled names) in taxon?}
 }
 \value{
 a character vector
