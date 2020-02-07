@@ -7,8 +7,9 @@
 get.taxa(taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   life.form = FALSE, habitat = FALSE, vegetation.type = FALSE,
   vernacular = FALSE, states = FALSE, establishment = FALSE,
-  drop = c("authorship", "genus", "specific.epiteth", "infra.epiteth",
-  "name.status"), suggestion.distance = 0.9, parse = FALSE)
+  domain = FALSE, endemism = FALSE, drop = c("authorship", "genus",
+  "specific.epiteth", "infra.epiteth", "name.status"),
+  suggestion.distance = 0.9, parse = FALSE)
 }
 \arguments{
 \item{taxa}{a character vector containing one or more taxa, without authors 
@@ -30,6 +31,10 @@ see \code{\link{remove.authors}} if you have a list with authorities}
 
 \item{establishment}{include the establishment type (native, cultivated or 
 naturalized)?}
+
+\item{domain}{return phytogeographyc domains?}
+
+\item{endemism}{is the taxon endemic to Brazil?}
 
 \item{drop}{NULL or character vector with names of columns with taxonomic
 information to be removed from the returned data frame. Available names: 

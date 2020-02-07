@@ -10,12 +10,7 @@
 #' get_endemism(taxa)
 #' }
 get_endemism <- function(taxa) {
-  get_sp_endemism <- function(id) {
-    if (is.na(id)) return(NA)
-    sp_info <- jsonlite::fromJSON(paste0("http://floradobrasil.jbrj.gov.br/reflora/listaBrasil/ConsultaPublicaUC/ResultadoDaConsultaCarregaTaxonGrupo.do?&idDadosListaBrasil=", id))
-    paste(sp_info$endemismo, collapse = "|")
-  }
-  endemism <- sapply(taxa$id, get_sp_endemism)
-  taxa$endemism <- endemism
+  taxa <- dplyr::left_join(taxa, distribution[, c("id", "endemism")], 
+                           by = "id")
   taxa
 }

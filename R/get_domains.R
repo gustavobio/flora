@@ -10,12 +10,7 @@
 #' get_domains(taxa)
 #' }
 get_domains <- function(taxa) {
-  get_sp_domain <- function(id) {
-    if (is.na(id)) return(NA)
-    sp_info <- jsonlite::fromJSON(paste0("http://floradobrasil.jbrj.gov.br/reflora/listaBrasil/ConsultaPublicaUC/ResultadoDaConsultaCarregaTaxonGrupo.do?&idDadosListaBrasil=", id))
-    paste(sp_info$dominioFitogeografico, collapse = "|")
-  }
-  domains <- sapply(taxa$id, get_sp_domain)
-  taxa$domain <- domains
+  taxa <- dplyr::left_join(taxa, distribution[, c("id", "domain")], 
+                          by = "id")
   taxa
 }

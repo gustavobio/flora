@@ -16,6 +16,8 @@
 #' @param states include occurrence data?
 #' @param establishment include the establishment type (native, cultivated or 
 #'   naturalized)?
+#' @param domain return phytogeographyc domains?
+#' @param endemism is the taxon endemic to Brazil?
 #' @param drop NULL or character vector with names of columns with taxonomic
 #'   information to be removed from the returned data frame. Available names: 
 #'   "id", "scientific.name", "accepted.name", "family", "genus",
@@ -41,7 +43,7 @@
 #' }
 get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE, 
                        life.form = FALSE, habitat = FALSE, vegetation.type = FALSE, vernacular = FALSE, states = FALSE, 
-                       establishment = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
+                       establishment = FALSE, domain = FALSE, endemism = FALSE, drop = c("authorship", "genus", "specific.epiteth", 
                                                        "infra.epiteth", "name.status"), 
                        suggestion.distance = 0.9, parse = FALSE) 
 {
@@ -215,6 +217,14 @@ get.taxa <- function (taxa, replace.synonyms = TRUE, suggest.names = TRUE,
   }
   if (establishment) {
     res <- dplyr::left_join(res, distribution[, c("id", "establishment")], 
+                            by = "id")
+  }
+  if (domain) {
+    res <- dplyr::left_join(res, distribution[, c("id", "domain")], 
+                            by = "id")
+  }
+  if (endemism) {
+    res <- dplyr::left_join(res, distribution[, c("id", "endemism")], 
                             by = "id")
   }
   res
