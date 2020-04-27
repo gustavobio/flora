@@ -4,12 +4,14 @@
 \alias{get.synonyms}
 \title{List all synonyms of a given taxa}
 \usage{
-get.synonyms(taxon, fix = FALSE)
+get.synonyms(taxon, fix = FALSE, relationship = FALSE)
 }
 \arguments{
 \item{taxon}{a character vector containing a name.}
 
 \item{fix}{should the function fix issues (synonyms, mispelled names) in taxon?}
+
+\item{relationship}{return the kind of relationship?}
 }
 \value{
 a character vector
@@ -19,6 +21,6 @@ This function returns all the synonyms of a given taxon according to the Brazili
 }
 \examples{
 \dontrun{
-synonyms("Myrcia lingua")
+get.synonyms("Myrcia lingua")
 }
 }
