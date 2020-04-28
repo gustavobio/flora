@@ -13,14 +13,10 @@ The dataset included in the package was kindly made available by the [Brazilian 
 
 ## Installation
 
-#### Install devtools and shiny
+#### Install devtools
 
 ```coffee
 install.packages("devtools")
-install.packages("shiny")
-install.packages("dplyr")
-install.packages("httr")
-library("devtools")
 ```
 
 #### Install flora
@@ -49,30 +45,27 @@ get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"))
 3    Coffea arabica          <NA>                    Coffea arabica
 ```
 
-There are several arguments to `get.taxa`. For instance, you can get the states of Brazil where the taxa occur:
+There are several arguments to `get.taxa`. For instance, you can get the domains in Brazil where the taxa occur:
 
 ```coffee
-get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"), states = TRUE)
+get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"), domain = TRUE)
 ```
 
 ```coffee
-     id               scientific.name accepted.name          family taxon.rank taxon.status
-1  9668 Miconia albicans (Sw.) Triana          <NA> Melastomataceae    species     accepted
-2 10699 Myrcia guianensis (Aubl.) DC.          <NA>       Myrtaceae    species     accepted
-3 24410             Coffea arabica L.          <NA>       Rubiaceae    species     accepted
-         search.str threat.status            notes  original.search
-1  Miconia albicans          <NA>                  Miconia albicans
-2 Myrcia guianensis            LC replaced synonym    Myrcia lingua
-3    Coffea arabica          <NA>                    Coffea arabica
-                                                                  occurrence
-1 AC;AL;AM;AP;BA;CE;DF;ES;GO;MA;MG;MS;MT;PA;PB;PE;PI;PR;RJ;RN;RO;RR;SE;SP;TO
-2                      AC;AL;AM;AP;BA;CE;ES;GO;MG;MS;MT;PA;PE;RJ;RN;RS;SC;SP
-3                         AC;AL;BA;CE;DF;ES;GO;MG;MS;PB;PE;PR;RJ;RS;SC;SE;SP
+get.taxa(c("Miconia albicans", "Myrcia lingua", "Cofea arabica"), domain = TRUE)
+     id               scientific.name accepted.name          family taxon.rank taxon.status        search.str threat.status
+1  9668 Miconia albicans (Sw.) Triana          <NA> Melastomataceae    species     accepted  Miconia albicans          <NA>
+2 10699 Myrcia guianensis (Aubl.) DC.          <NA>       Myrtaceae    species     accepted Myrcia guianensis            LC
+3 24410             Coffea arabica L.          <NA>       Rubiaceae    species     accepted    Coffea arabica          <NA>
+             notes  original.search                                   domain
+1                  Miconia albicans Amazônia|Caatinga|Cerrado|Mata Atlântica
+2 replaced synonym    Myrcia lingua Amazônia|Caatinga|Cerrado|Mata Atlântica
+3   was misspelled    Cofea arabica Amazônia|Caatinga|Cerrado|Mata Atlântica
 ```
 
-Other arguments include `life.form`, `habitat`, `vernacular`, and `establishment`.
+Other arguments include `life.form`, `habitat`, `vernacular`, `states`, and `establishment`.
 
-`get.taxa` will automatically fix misspelled names when possible, but you can also use `suggest.names` for that:
+`get.taxa` can automatically fix misspelled names when possible (when `suggest.names = TRUE`), but you can also use `suggest.names` for that:
 
 ```coffee
 suggest.names("Cofea arabyca")
@@ -105,10 +98,43 @@ lower.taxa("Rapanea")
 [37] "Rapanea depauperata"  "Rapanea paulensis"    "Rapanea wettsteinii" 
 ```
 
+The function `get.synonyms` returns all synonyms of a given name:
+
+```coffee
+get.synonyms("Myrcia guianensis")
+  [1] "Myrcia pallens"               "Myrcia torta"                 "Myrcia obtecta"               "Myrcia amethystina"          
+  [5] "Myrcia corumbensis"           "Myrcia cymosa"                "Myrcia daphnoides"            "Myrcia decrescens"           
+  [9] "Myrcia elaeodendra"           "Myrcia hepatica"              "Myrcia hiemalis"              "Myrcia intermedia"           
+ [13] "Myrcia lingua"                "Myrcia microcarpa"            "Myrcia nigropunctata"         "Myrcia obtusa"               
+ [17] "Myrcia rhabdoides"            "Myrcia rorida"                "Myrcia rubella"               "Myrcia suaveolens"           
+ [21] "Myrcia angustifolia"          "Myrcia camapuana"             "Myrcia campestris"            "Myrcia collina"              
+ [25] "Myrcia dermatophylla"         "Myrcia dictyophylla"          "Myrcia didrichseniana"        "Myrcia leucadendron"         
+ [29] "Myrcia mansoi"                "Myrcia myoporina"             "Myrcia parnahibensis"         "Myrcia scrobiculata"         
+ [33] "Myrcia vacciniifolia"         "Myrcia velhensis"             "Myrcianthes cymosa"           "Aguava guianensis"  
+ ...
+ [137] "Myrcia plumbea"               "Myrcia poeppigiana"           "Myrcia pusilla"               "Myrcia vattimoi" 
+```
+
+You can also return the relationships between names using `get.synonyms`:
+
+```coffee
+get.synonyms("Myrcia guianensis", relationship = T)
+                  spp                      synonym                   relationship
+1   Myrcia guianensis               Myrcia pallens Tem como sinônimo HETEROTIPICO
+2   Myrcia guianensis                 Myrcia torta Tem como sinônimo HETEROTIPICO
+3   Myrcia guianensis               Myrcia obtecta Tem como sinônimo HETEROTIPICO
+4   Myrcia guianensis           Myrcia amethystina Tem como sinônimo HETEROTIPICO
+5   Myrcia guianensis           Myrcia corumbensis Tem como sinônimo HETEROTIPICO
+6   Myrcia guianensis                Myrcia cymosa Tem como sinônimo HETEROTIPICO
+...
+139 Myrcia guianensis               Myrcia pusilla Tem como sinônimo HETEROTIPICO
+140 Myrcia guianensis              Myrcia vattimoi Tem como sinônimo HETEROTIPICO
+```
+
 You may also search for a species using vernacular names:
 
 ```coffee
-vernacular("Pimenta", exact = TRUE)
+vernacular("Pimenta", exact = T)
 ```
 
 ```coffee
@@ -118,7 +144,7 @@ vernacular("Pimenta", exact = TRUE)
 3 110583        Xylopia sericea      Annonaceae         Pimenta         <NA>
 ```
 
-Smaller things like casing and missplaced whitespaces are also covered:
+Smaller things like casing and missplaced whitespaces are also automatically fixed in `get.taxa`, but there are specific functions for those as well:
 
 ```coffee
 fixCase("myrcia lingua")
@@ -136,12 +162,3 @@ standardize.names("Myrcia sp2")
 standardize.names("Myrcia sp.3")
 [1] "Myrcia sp.3"
 ```
-## Web application
-
-There is a local web application included where one can simply paste names into a textbox and get taxonomic information, links to the original data source, search within the results and export to a csv file.
-
-```
-web.flora()
-```
-*Click on the screenshot for an expanded view*
-![](http://i.imgur.com/pFaBQWI.png)

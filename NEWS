@@ -1,30 +1,41 @@
 flora 0.3.4
 ================
+
   * Updated dataset (10th April 2020)
+  
   * Fixed threat statuses
   
 flora 0.3.3
 ================
+
   * Updated dataset (6th Feb 2020)
+  
   * Threat status now comes from CNC Flora
+  
   * Domain and endemism are now available
 
 flora 0.3.2
 ================
+
   * Updated dataset (29th Oct 2019)
 
 flora 0.3.1
 ================
+
   * Vegetation type and life form are now included in the dataset
+  
   * Updated dataset (29th Jan 2019)
 
 flora 0.3.0
 ================
+
   * Much improved performance
+  
   * Updated dataset (27th Oct 2017)
   
 flora 0.2.9
 ================
+
   * New function to retrieve information on vegetation types for a list of taxa (`get_vegtype`)
 
 flora 0.2.8
