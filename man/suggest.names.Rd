@@ -4,8 +4,12 @@
 \alias{suggest.names}
 \title{Suggest a valid name from a misspelled one}
 \usage{
-suggest.names(taxon, max.distance = 0.75, return.na = TRUE,
-  ignore.words = NULL)
+suggest.names(
+  taxon,
+  max.distance = 0.75,
+  return.na = TRUE,
+  ignore.words = NULL
+)
 }
 \arguments{
 \item{taxon}{a character vector containing a single name}

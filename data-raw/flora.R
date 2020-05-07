@@ -3,6 +3,11 @@ require(jsonlite)
 require(tidyverse)
 require(finch)
 require(usethis)
+require(flora)
+
+# Careful with this if you have other IPT files in your cache!
+
+dwca_cache$delete_all()
 
 ipt.files <-
   dwca_read(
@@ -14,7 +19,7 @@ ipt.files <-
 all.taxa <- ipt.files$data$taxon.txt[-c(2:5, 26)]
 
 status_cnc <-
-  read.csv("data-raw/status_fixed.csv",
+  read.csv("data-raw/status_cnc.csv",
            stringsAsFactors = F,
            h = T)
 
@@ -368,4 +373,4 @@ plants <- c("Banisteriopsis paraguariensis", "Cassia caespitosa", "Eriocaulon ba
             "Caladium picturatum var. lemaireanum", "Ouratea ovalis", "Cryptarrhena kegelii", 
             "Acer tataricum")
 
-usethis::use_data(plants)
+usethis::use_data(plants, overwrite = T)
