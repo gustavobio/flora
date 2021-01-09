@@ -139,6 +139,7 @@ all.taxa$taxon.status <-
   gsub("SINONIMO", "synonym", all.taxa$taxon.status)
 
 all.taxa$search.str <- trim(all.taxa$search.str)
+all.taxa$search.str <- iconv(all.taxa$search.str, "Windows-1252", "UTF8")
 
 all.taxa$name.status <-
   gsub("AINDA_DESCONHECIDO", "unknown", all.taxa$name.status)
