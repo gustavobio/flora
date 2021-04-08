@@ -1,3 +1,5 @@
+# WARNING: The package is not supported on CRAN anymore. The only way to get the most recent versions is from GitHub. There is a 5Mb limit to packages uploaded to CRAN. With recent inclusions, the Flora DB distributed with the package grew larger than that and CRAN administrators are not accepting my submissions.
+
 flora
 ===
 
