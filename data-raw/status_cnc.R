@@ -48,5 +48,5 @@ all_families %>%
   gather(accepted_name, species, key = accepted, value = search.str) %>%
   select(-n, -family, -synonym, -accepted) %>%
   distinct() %>%
-  rename(threat.status = threat) %>%
+  rename(threat.status.cnc = threat) %>%
   write.csv(file = "data-raw/status_cnc.csv", row.names = F)
