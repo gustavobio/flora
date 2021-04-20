@@ -23,6 +23,11 @@ status_cnc <-
            stringsAsFactors = F,
            h = T)
 
+status_mma <-
+  read.csv("data-raw/status_mma.csv",
+           stringsAsFactors = F,
+           h = T)
+
 distribution <- ipt.files$data$distribution.txt
 
 relationships <- ipt.files$data$resourcerelationship.txt
@@ -335,6 +340,9 @@ words <-
 
 all.taxa <- all.taxa %>%
   left_join(status_cnc)
+
+all.taxa <- all.taxa %>%
+  left_join(status_mma)
 
 all.taxa.accepted <- subset(all.taxa, taxon.status == "accepted")
 
