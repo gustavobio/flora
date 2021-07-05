@@ -1,4 +1,4 @@
-# WARNING: The package is no long supported on CRAN. Both the database and the code are now outdated in their repository and should not be used. The only way to get the most recent version is from GitHub. Please follow the instructions below. There is a 5Mb limit to packages uploaded to CRAN. With recent inclusions, the database distributed within the package grew larger than that and CRAN administrators are not accepting my submissions.
+** WARNING: The package is no long supported on CRAN. Both the database and the code are now outdated in their repository and should not be used. The only way to get the most recent version is from GitHub. Please follow the instructions below. There is a 5Mb limit to packages uploaded to CRAN. With recent inclusions, the database distributed within the package grew larger than that and CRAN administrators are not accepting my submissions. **
 
 flora
 ===
