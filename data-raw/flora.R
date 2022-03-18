@@ -13,7 +13,8 @@ ipt.files <-
   dwca_read(
     "http://ipt.jbrj.gov.br/jbrj/archive.do?r=lista_especies_flora_brasil",
     read = T,
-    na.strings = ""
+    na.strings = "",
+    encoding = "UTF-8"
   )
 
 all.taxa <- ipt.files$data$taxon.txt[-c(2:5, 26)]
@@ -34,6 +35,8 @@ relationships <- ipt.files$data$resourcerelationship.txt
 
 relationships$relationshipOfResource <-
   iconv(relationships$relationship, to = "windows-1252", from = "utf8")
+
+#relationships$relationshipOfResource <- relationships$relationship
 
 species.profiles <- ipt.files$data$speciesprofile.txt
 
@@ -144,7 +147,7 @@ all.taxa$taxon.status <-
   gsub("SINONIMO", "synonym", all.taxa$taxon.status)
 
 all.taxa$search.str <- trim(all.taxa$search.str)
-all.taxa$search.str <- iconv(all.taxa$search.str, "Windows-1252", "UTF8")
+all.taxa$search.str <- iconv(all.taxa$search.str, to = "windows-1252", from = "utf8")
 
 all.taxa$name.status <-
   gsub("AINDA_DESCONHECIDO", "unknown", all.taxa$name.status)

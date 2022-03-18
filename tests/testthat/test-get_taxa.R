@@ -25,7 +25,7 @@ test_that("get.taxa returns the expected values for synonyms", {
   expect_equal(myrcia_lingua$family, "Myrtaceae")
   expect_equal(myrcia_lingua$taxon.rank, "species")
   expect_equal(myrcia_lingua$taxon.status, "accepted")
-  expect_equal(myrcia_lingua$threat.status, "LC")
+  expect_equal(myrcia_lingua$threat.status.cnc, "LC")
   expect_equal(myrcia_lingua$search.str, "Myrcia guianensis")
   expect_equal(myrcia_lingua$notes, "replaced synonym")
   expect_equal(myrcia_lingua$original.search, "Myrcia lingua")
@@ -47,5 +47,5 @@ test_that("get.taxa returns the occurrence of the taxa", {
 casearia_sylvestris <- get.taxa("Casearia sylvestris", life.form = TRUE, habitat = TRUE, establishment = TRUE, states = TRUE)
 
 test_that("get.taxa returns the life forms of the taxa", {
-  expect_match(casearia_sylvestris$life.form, "Arbusto|Ãrvore|Subarbusto")
+  expect_match(casearia_sylvestris$life.form, "Arbusto|Árvore|Subarbusto")
 })
