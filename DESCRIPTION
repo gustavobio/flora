@@ -1,7 +1,7 @@
 Package: flora
 Type: Package
 Title: Tools for Interacting with the Brazilian Flora 2020
-Version: 0.3.6
+Version: 0.3.7
 Author: Gustavo Carvalho
 Maintainer: Gustavo Carvalho <gustavo.bio@gmail.com>
 Depends:
@@ -21,3 +21,4 @@ License: GPL (>= 2)
 URL: http://www.github.com/gustavobio/flora
 BugReports: http://www.github.com/gustavobio/flora/issues
 RoxygenNote: 7.1.1
+LazyData: true

@@ -29,14 +29,19 @@ status_mma <-
            stringsAsFactors = F,
            h = T)
 
+status_mma2022 <-
+  read.csv("data-raw/status_mma_2022.csv",
+           stringsAsFactors = F,
+           h = T)
+
 distribution <- ipt.files$data$distribution.txt
 
 relationships <- ipt.files$data$resourcerelationship.txt
 
-relationships$relationshipOfResource <-
-  iconv(relationships$relationship, to = "windows-1252", from = "utf8")
+#relationships$relationshipOfResource <-
+#  iconv(relationships$relationship, to = "windows-1252", from = "utf8")
 
-#relationships$relationshipOfResource <- relationships$relationship
+relationships$relationshipOfResource <- relationships$relationship
 
 species.profiles <- ipt.files$data$speciesprofile.txt
 
@@ -147,7 +152,7 @@ all.taxa$taxon.status <-
   gsub("SINONIMO", "synonym", all.taxa$taxon.status)
 
 all.taxa$search.str <- trim(all.taxa$search.str)
-all.taxa$search.str <- iconv(all.taxa$search.str, to = "windows-1252", from = "utf8")
+#all.taxa$search.str <- iconv(all.taxa$search.str, to = "windows-1252", from = "utf8")
 
 all.taxa$name.status <-
   gsub("AINDA_DESCONHECIDO", "unknown", all.taxa$name.status)
@@ -346,6 +351,9 @@ all.taxa <- all.taxa %>%
 
 all.taxa <- all.taxa %>%
   left_join(status_mma)
+
+all.taxa <- all.taxa %>%
+  left_join(status_mma2022)
 
 all.taxa.accepted <- subset(all.taxa, taxon.status == "accepted")
 

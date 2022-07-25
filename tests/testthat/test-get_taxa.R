@@ -47,5 +47,5 @@ test_that("get.taxa returns the occurrence of the taxa", {
 casearia_sylvestris <- get.taxa("Casearia sylvestris", life.form = TRUE, habitat = TRUE, establishment = TRUE, states = TRUE)
 
 test_that("get.taxa returns the life forms of the taxa", {
-  expect_match(casearia_sylvestris$life.form, "Arbusto|Árvore|Subarbusto")
+  expect_match(casearia_sylvestris$life.form, "Arbusto|Ãrvore|Subarbusto")
 })
